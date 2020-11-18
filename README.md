@@ -1,6 +1,5 @@
 # PROJET-LOGIQUE-HLIN509
 ## Projet de logique :
-======================
 
 ### Concevoir un jeu entre un joueur et un Oracle. Les étapes du jeu sont les suivantes :
 
@@ -12,5 +11,6 @@
 
 -----------------
 > A l’issue du jeu, vous retournerez un résultat qui permet de départager les joueurs (Réfléhissez à des critères d’évaluation d’une partie de jeu).
+
 
 #### Lien du PDF : [Enonce-Projet.pdf](https://moodle.umontpellier.fr/pluginfile.php/1252115/mod_resource/content/1/Enonce-Projet.pdf)
