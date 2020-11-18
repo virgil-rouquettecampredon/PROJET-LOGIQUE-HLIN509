@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>médiathèque JS</title>
+    <link rel="icon" href="img/book.ico" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script type="text/javascript" src="js/Adherent.js" defer></script>
+    <script type="text/javascript" src="js/Livre.js" defer></script>
+    <script type="text/javascript" src="js/Scenario.js" defer></script>
+    </script>
+    </head>
+    <body>
+    <h2>Médiathèque JavaScript</h2>
+    <div id="enregistrements">
+        <div id="ajoutAdherent">
+        <fieldset>
+        <legend>nouvel adhérent</legend>
+    <input type="text" id="nomAdherent" placeholder="nom...">
+        <input type="button" id="ajouterAdherent" value="ajouter">
+        </fieldset>
+        </div>
+        <div id="ajoutLivre">
+        <fieldset>
+        <legend>nouveau livre</legend>
+    <input type="text" id="titreLivre" placeholder="titre...">
+        <input type="button" id="ajouterLivre" value="ajouter">
+        </fieldset>
+        </div>
+        </div>
+        <div id="listes">
+        <div id="adh">
+        <fieldset>
+        <legend>adhérents</legend>
+        <ul id="listeAdherents"></ul>
+        </fieldset>
+        </div>
+        <div id="dispos">
+        <fieldset>
+        <legend>livres disponibles</legend>
+    <ul id="listeLivresDisponibles"></ul>
+        </fieldset>
+        </div>
+        <div id="empr">
+        <fieldset>
+        <legend>livres empruntés</legend>
+    <ul id="listeLivresEmpruntes"></ul>
+        </fieldset>
+        </div>
+        </div>
+        </body>
+        </html>
