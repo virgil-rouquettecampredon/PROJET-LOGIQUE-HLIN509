@@ -1,2 +1,9 @@
 # Default ignored files
 /workspace.xml
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../../\Users\Erwan\IdeaProjects\PROJET-LOGIQUE-HLIN509.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
