@@ -1,6 +1,12 @@
-class ExpressionComplexe{
+class ExpressionComplexe extends Expression{
 
+    /**Constructeur d'une expression complexe :
+     * @param operande1 : Expression renseignant la première expression complexe composant notre expression.
+     * @param operande2 : Expression renseignant la seconde expression complexe composant notre expression.
+     * @param operateur : String renseignant l'opératuer à applquer à nos deux expressions complexes.
+     * **/
     constructor(operande1, operateur ,operande2 ) {
+        super();
         this.operande1 = operande1;
         this.operande2 = operande2;
         this.operateur = operateur;
