@@ -4,7 +4,7 @@ class Expression {
         this.estNegatif = false;
     }
 
-    AnalyserString(StringADonner, finString, debutString){
+    AnalyserString(StringADonner, debutString,finString){
         let nbParanthese = 0;
         this.tableauOperande = [];
         let compteurTableau = 0;
@@ -22,7 +22,7 @@ class Expression {
                     ope += StringADonner[j];
                 }
                 this.tableauOperande.push(ope);
-                console.log(this.tableauOperande[i]);
+                //console.log(this.tableauOperande[i]);
                 compteurTableau++;
                 debutOperande = i+1;
             }
@@ -31,7 +31,7 @@ class Expression {
             let operande1 = this.tableauOperande[0]
             if (operande1.length != 1){
                 if (operande1[0] == "(" && operande1[operande1.length-1] == ")"){
-                    this.AnalyserString(operande1,operande1.length-1, 1);
+                    this.AnalyserString(operande1,1, operande1.length-1);
                 }
             }
         }
