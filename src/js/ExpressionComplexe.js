@@ -28,7 +28,7 @@ class ExpressionComplexe extends Expression{
                 this.n = 2;
                 break;
             case "→":
-                this.resultat1 = "¬" + this.operande1;
+                this.resultat1 = "¬(" + this.operande1 + ")";
                 this.resultat2 = this.operande2;
                 this.n = 2;
                 break;
@@ -42,8 +42,8 @@ class ExpressionComplexe extends Expression{
         }
     }
 
-    evalNegation(){
-        if (this.operateur == "¬"){
+    evalNegation() {
+        if (this.operateur == "¬") {
 
         }
 
