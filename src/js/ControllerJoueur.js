@@ -5,12 +5,12 @@
 /*==============================
  === GESTION DES OPERATIONS ===
  ==============================*/
-/**TAG des expressions complexes restant à traiter par le joueur : **/  let TAG_operationATraiter = "operationsATraiter";
-/**TAG des expressions complexes déjà traitée par le joueur : **/       let TAG_operatioTraitee = "operationsTraitee";
+/**TAG des expressions complexes restant à traiter par le joueur : **/  export let TAG_operationATraiter = "operationsATraiter";
+/**TAG des expressions complexes déjà traitée par le joueur : **/       export let TAG_operatioTraitee = "operationsTraitee";
 
 //Récupération de(ou des) expression(s) complexe(s) à traiter :
-//operationsAtraiter = HTMLElement renseignant la dic dans laquelle le ou les expressions complexes à traiter sont stockées
+//operationsAtraiter = HTMLElement renseignant la div dans laquelle le ou les expressions complexes à traiter sont stockées
 let operationsAtraiter = document.getElementsByClassName(TAG_operationATraiter);
-
+//Pour chaque operations de operationsAtraiter,
 
 
