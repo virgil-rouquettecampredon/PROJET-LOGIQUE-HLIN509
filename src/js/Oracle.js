@@ -1,17 +1,7 @@
+import * as TAG from "./TAG";
 /**Scenario représentant notre oracle de jeu**/
 //Role : Il va avoir le role de centraliser les informations qui lui parviendront via le
-//       joueur pour ensuite appeler l'action adéquate.
-
-/*==============================
- ======== VARIABLES TAG ========
- ==============================*/
-import {TAG_Branche} from "./Arbre";
-
-/*Tag à appliquer au expressions à traiter*/            export let TAG_expressionComplexeATraiter = "expressionComplexeATraiter";
-/*Tag à appliquer au expressions qui ont été traitées*/ export let TAG_expressionComplexeTraitee = "expressionComplexeTraitee";
-//(et ne sont plus traitable par le joueur)
-/*Tag à appliquer aux expressions*/                     export let TAG_expression = "expression";
-
+//       joueur pour ensuite appeler l'action adéquate
 
 let ExpressionAnalyses; // String récupéré qui est donnée par le joueur
 
@@ -26,8 +16,8 @@ export function Action_Joueur(element){
     //Resultat
     let res = [];
     //On récupère la branche de l'élément (son plus proche père)
-    let parent = element.closest("." + TAG_Branche);
-    let autresExpressions = parent.getElementsByClassName(TAG_expression);
+    let parent = element.closest("." + TAG.TAG_Branche);
+    let autresExpressions = parent.getElementsByClassName(TAG.TAG_expression);
     //Variable symbolisant le reste des expressions qui n'ont pas été affectées par le choix du joueur
     let expParDef = [];
     for (let i = 0; i < autresExpressions.length; i++) {

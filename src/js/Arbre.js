@@ -1,13 +1,4 @@
-/**TAG des branches de l'arbre restant à traiter par le joueur : **/
-import * as ORACLE from "./Oracle";
-import "./Branche";
-
-export let TAG_BranchesATraiter = "bracheATraiter";
-/**TAG des branches déjà traitées par le joueur : **/                   export let TAG_BranchesTraitees = "BrancheTraitee";
-/**TAG des branches fermées par le joueur : **/                         export let TAG_BranchesFermees = "BrancheFermee";
-/**TAG des branches **/                                                 export let TAG_Branche = "Branche";
-/**TAG des rangs des branches **/                                       export let TAG_RangBranche = "rang";
-/**TAG des wrapper**/                                                   export let TAG_Wrapper = "wrapper";
+//import * as ORACLE from "./Oracle";
 
 //Classe modélisant les controles alloués au joueur et l'arborescence des branches de l'arbre
 class Arbre{
@@ -15,16 +6,16 @@ class Arbre{
     //static cptBranche = 0;
     //Branches dans l'arbre
     static arborescence = [];
-    /**Constructeur d'un Arbre
+
+    /**Fonction permettant de construire un arbre
      * @param expDep : [][] renseignant l'expression de départ (=> [["aOUb",true],["c",false]])
      * @param HTMLelem : Element renseignant l'élément dans lequel l'arbre va s'afficher**/
-    constructor(expDep,HTMLelem) {
-        //Arbre.cptBranche++;
+    static Creer(expDep,HTMLelem){
         Arbre.addBranche(HTMLelem,null,expDep);
     }
 
     /**Fonction permettant d'ajouter une nouvelle branche à l'arbre
-     @param container : Element renseignant l'endroit ou mettre la branche
+     @param container : HTMLElement renseignant l'endroit ou mettre la branche
      @param pere : Branche renseignant le pere de la branche à générer, lui meme une branche
      @param branche : [][] renseignant toutes les expressions dans l'une des branches resultante avec pour chacune
              d'elle l'information de si elles sont encore developpable ou non.
@@ -35,8 +26,8 @@ class Arbre{
          //Arbre.cptBranche++;
          //Générer le wrapper
          let wrapper = document.createElement("div");
-         wrapper.classList.add(TAG_Wrapper);
-         wrapper.id = "wb" + Arbre.cptBranche;
+         wrapper.classList.add(TAGS.TAG_Wrapper);
+         wrapper.id = "wb" + (Arbre.arborescence.length + 1);
 
          //Générer la branche
          //Nouvelle branche
@@ -52,22 +43,22 @@ class Arbre{
              //Si cette expression est encore developpable, alors
              if(branche[i][1]){
                  nbencoreDev = true;
-                 htmlelem.classList.add(ORACLE.TAG_expressionComplexeATraiter);
+                 htmlelem.classList.add(TAGS.TAG_expressionComplexeATraiter);
              }else{
-                 htmlelem.classList.add(ORACLE.TAG_expressionComplexeTraitee);
+                 htmlelem.classList.add(TAGS.TAG_expressionComplexeTraitee);
              }
              //Dans tous les cas, c'est une expression :
-             htmlelem.classList.add(ORACLE.TAG_expression);
+             htmlelem.classList.add(TAGS.TAG_expression);
          }
         //S'il reste au moins une expression encore develloppable dans la nouvlle branche créée
         if(nbencoreDev){
-            nvllBranche.classList.add(TAG_BranchesATraiter);
+            nvllBranche.classList.add(TAGS.TAG_BranchesATraiter);
         }else{
-            nvllBranche.classList.add(TAG_BranchesTraitees);
+            nvllBranche.classList.add(TAGS.TAG_BranchesTraitees);
         }
-        nvllBranche.classList.add(TAG_Branche);
+        nvllBranche.classList.add(TAGS.TAG_Branche);
         //L'ID d'une nouvelle branche correspond à son ordre d'apparation dans l'arborescence
-        nvllBranche.id = "b"+Arbre.cptBranche;
+        nvllBranche.id = "b"+(Arbre.arborescence.length+1);
 
         //Encapsuler la branche dans le wrapper
         wrapper.append(nvllBranche);
@@ -76,8 +67,14 @@ class Arbre{
         container.append(wrapper);
 
         //Gestion au niveau de la classe Arbre
-        let branch_br = new Branche(pere.contenu, nvllBranche, container);
-        pere.addFils(branch_br);
+        let branch_br;
+        if(pere!=null){
+            branch_br= new Branche(pere.contenu, nvllBranche, container);
+            pere.addFils(branch_br);
+        }else{
+            //racine de l'arborescence
+            branch_br = new Branche(null, nvllBranche, container);
+        }
         Arbre.arborescence.push(branch_br);
         //this.arborescence.push(branche_br);
     }
@@ -94,14 +91,14 @@ class Arbre{
          ==============================*/
         //Récupération de(ou des) branche(s) complexe(s) à traiter :
         //BranchesAtraiter = HTMLElement renseignant la div dans laquelle le ou les expressions complexes restant à traiter sont stockées
-        let branchesAtraiter = document.getElementsByClassName(TAG_BranchesATraiter);
+        let branchesAtraiter = document.getElementsByClassName(TAGS.TAG_BranchesATraiter);
         //Pour chaque operations de branchesAtraiter, il faut regarder si elles sont encore traitables
         //Pour cela, on va regarder les TAG correspondant
         //operationsATraiter : HTMLElement renseignant toutes les operations encore a traiter
 
         //Pour chaques branches à traiter
         for (let i = 0; i < branchesAtraiter.length; i++) {
-            let expressionsATraiter = branchesAtraiter[i].getElementsByClassName(ORACLE.TAG_expressionComplexeATraiter);
+            let expressionsATraiter = branchesAtraiter[i].getElementsByClassName(TAGS.TAG_expressionComplexeATraiter);
             //Pour chaque expression a traiter
             for (let j = 0; j <expressionsATraiter.length ; j++) {
                 expressionsATraiter[j].onclick = function (event) {
@@ -109,25 +106,26 @@ class Arbre{
                     //On récupère l'élément
                     let element = event.currentTarget;
                     //On récupère la branche de l'élément
-                    let parent = element.closest("." + TAG_Branche);
+                    let parent = element.closest("." + TAGS.TAG_Branche);
                     //Si la branche n'est pas fermée par le joueur, alors
-                    if (!parent.classList.contains(TAG_BranchesFermees)) {
+                    if (!parent.classList.contains(TAGS.TAG_BranchesFermees)) {
                         //On peut appliquer la suite de l'action du clic sur une expression a traiter
                         //On modifie la branche actuelle
-                        parent.classList.remove(TAG_BranchesATraiter);
-                        parent.classList.add(TAG_BranchesTraitees);
+                        parent.classList.remove(TAGS.TAG_BranchesATraiter);
+                        parent.classList.add(TAGS.TAG_BranchesTraitees);
 
                         //On enlève ensuite le TAG_expressionComplexeATraiter
-                        element.classList.remove(ORACLE.TAG_expressionComplexeATraiter);
+                        element.classList.remove(TAGS.TAG_expressionComplexeATraiter);
                         //On enlève aussi l'élément on_click
                         element.onclick = null;
 
                         //Enfin, on signale à l'oracle que le joueur a réalisé une action et qu'il peut la traiter
-                        let res = ORACLE.Action_Joueur(element);
+                        //let res = ORACLE.Action_Joueur(element);
+                        let res = [[["aOUb",true],["d",false]],[["aOUb",true],["d",false]]];
                         //On enlève toutes les expressions contennues dans parent
-                        let toutesLesExpressions = parent.getElementsByClassName(ORACLE.TAG_expression);
+                        let toutesLesExpressions = parent.getElementsByClassName(TAGS.TAG_expression);
                         for (let l = 0; l < toutesLesExpressions.length; l++) {
-                            toutesLesExpressions[l].classList.remove(ORACLE.TAG_expressionComplexeATraiter);
+                            toutesLesExpressions[l].classList.remove(TAGS.TAG_expressionComplexeATraiter);
                             toutesLesExpressions[l].onclick = null;
                         }
                         //Le resultat de l'action nous permettra ensuite de réaliser la suite
@@ -140,15 +138,19 @@ class Arbre{
                         //Puis on récupère l'élément Branche correspondant à la branche de l'élément cliqué
                         let branche_br = Arbre.arborescence[indiceBranche];
 
+                        console.log(indiceBranche);
+                        console.log(branche_br);
+
                         //Pour chaque branche retournée par l'Oracle
                         for (let k = 0; k < res.length; k++) {
                             //Générer le wrapper
                             let wrapper = document.createElement("div");
-                            wrapper.classList.add(TAG_Wrapper);
+                            wrapper.classList.add(TAGS.TAG_Wrapper);
                             wrapper.id = "f"+(k+1)+parent.id;
                             //Ajouter une branche ayant pour container wrapper
                             Arbre.addBranche(wrapper,branche_br,res[k]);
                         }
+                        branche_br.afficherFils();
                         Arbre.init();
                     } else {
                         console.log("Cette branche est fermée et ne peut par conséquent pas être plus développée");
@@ -160,7 +162,16 @@ class Arbre{
     }
 
 
+    /**Constructeur d'un Arbre
+     * @param expDep : [][] renseignant l'expression de départ (=> [["aOUb",true],["c",false]])
+     * @param HTMLelem : Element renseignant l'élément dans lequel l'arbre va s'afficher
+    constructor(expDep,HTMLelem) {
+        //Arbre.cptBranche++;
+        Arbre.addBranche(HTMLelem,null,expDep);
+    }
+    **/
     /*
+
 //Fonction renseignant le comportement à adopter quand le joueur clic sur une branche pour la fermer
 ONCLK_brancheAFermer(event){
     //On récupère l'élément
