@@ -54,8 +54,9 @@ class Expression {
 
     evalEntreDeuxOperandes(operande1, operateur, operande2){
         let n = 0;
-        switch (operateur){
+        switch (operateur[0]){
             case "∧":
+
                 operande1 = operande1;
                 operande2 = operande2;
                 n = 1;
@@ -78,14 +79,17 @@ class Expression {
                 n = 2;
                 break;
             case "↔":
+                console.log("COUCOU");
+                let caractere = operande1;
                 operande1 = "(" + operande1 + "→" + operande2 + ")";
-                operande2 = "(" + operande2 + "→" + operande1 + ")";
+                operande2 = "(" + operande2 + "→" + caractere + ")";
                 operateur = "∧"
                 n = 1;
                 break;
             default:
                 alert("Un des caractère n'est pas un utilisé en logique des propositions !");
         }
+        return operande1 + operateur + operande2;
     }
 
     evalNegation(StringADonner, debutString, finString) {
