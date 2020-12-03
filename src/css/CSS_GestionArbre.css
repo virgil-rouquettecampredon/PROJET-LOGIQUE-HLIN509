@@ -6,8 +6,60 @@ div#Arbre{
 }
 
 /*Pour tous les wrapper*/
+div#Arbre div.wrapper{
+    text-align: center;
+    padding-top: 20px;
+    display: inline-block;
+    vertical-align: top;
+}
 
 /*Pour toutes les branches*/
-div.wrapper div.Branche {
-
+div#Arbre div.wrapper div.Branche {
+    max-width: 50%;
+    min-width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+    display: block;
+    border: 2px solid black;
 }
+
+/*Pour toutes les branches qui ne sont plus a traiter*/
+div#Arbre div.wrapper div.Branche.BrancheTraitee{
+    color: grey;
+    border-color: grey;
+}
+
+/*Pour toutes les branches qui sont fermées*/
+div#Arbre div.wrapper div.Branche.BrancheFermee{
+    border: 2px solid red;
+}
+
+/*Pour toutes les expressions*/
+div#Arbre div.wrapper div.Branche div.expression{
+    text-align: center;
+    width: 100%;
+    height: auto;
+}
+
+/*Pour toutes les expressions qui sont encore developable*/
+div#Arbre div.wrapper div.Branche div.expression.expressionComplexeATraiter{
+    background-color: transparent;
+    transition: background-color .5s;
+}
+
+div#Arbre div.wrapper div.Branche div.expression.expressionComplexeATraiter:hover{
+    background-color: bisque;
+    cursor: auto;
+}
+
+/*Pour tous les canvas*/
+div#Arbre div.wrapper canvas.liaison{
+    position: absolute;
+}
+
+/*A FAIRE
+DEF classe pour wrapper fils et wrapper branche
+GESTION canvas dessin
+Mise en place taille minimale pour wrapper branche et wrapper fils*/

@@ -28,6 +28,7 @@ class Arbre{
          let wrapper = document.createElement("div");
          wrapper.classList.add(TAGS.TAG_Wrapper);
          wrapper.id = "wb" + (Arbre.arborescence.length + 1);
+         wrapper.style.width = "100%";
 
          //Générer la branche
          //Nouvelle branche
@@ -147,6 +148,7 @@ class Arbre{
                             let wrapper = document.createElement("div");
                             wrapper.classList.add(TAGS.TAG_Wrapper);
                             wrapper.id = "f"+(k+1)+parent.id;
+                            wrapper.style.width = (100/res.length)+"%";
                             //Ajouter une branche ayant pour container wrapper
                             Arbre.addBranche(wrapper,branche_br,res[k]);
                         }
