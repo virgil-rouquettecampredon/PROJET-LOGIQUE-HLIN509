@@ -2,6 +2,7 @@ class Expression {
 
     constructor() {
         this.estNegatif = false;
+        this.operations = [];
     }
 
     AnalyserString(StringADonner, debutString,finString){
@@ -56,35 +57,32 @@ class Expression {
         let n = 0;
         switch (operateur[0]){
             case "∧":
-
-                operande1 = operande1;
-                operande2 = operande2;
-                n = 1;
+                this.operations[0] = operande1;
+                this.operations[1] = operande2;
+                this.operations[2] = 1;
                 break;
             case "∨":
-                operande1 = operande1;
-                operande2 = operande2;
-                n = 2;
+                this.operations[0] = operande1;
+                this.operations[1] = operande2;
+                this.operations[2] = 2;
                 break;
             case "→":
                 if (operande1[0] == "¬"){
-                    operande1 = operande1.substring(1);
-                    operande2 = operande2;
+                    this.operations[0] = operande1.substring(1);
+                    this.operations[1] = operande2;
                 }
                 else{
-                    operande1 = "¬(" + operande1 + ")";
-                    operande2 = operande2;
+                    this.operations[0] = "¬(" + operande1 + ")";
+                    this.operations[1] = operande2;
                 }
-                operateur = "∨";
-                n = 2;
+                this.operations[2] = 2;
                 break;
             case "↔":
                 console.log("COUCOU");
                 let caractere = operande1;
-                operande1 = "(" + operande1 + "→" + operande2 + ")";
-                operande2 = "(" + operande2 + "→" + caractere + ")";
-                operateur = "∧"
-                n = 1;
+                this.operations[0] = "(" + operande1 + "→" + operande2 + ")";
+                this.operations[1] = "(" + operande2 + "→" + caractere + ")";
+                this.operations[2] = 1;
                 break;
             default:
                 alert("Un des caractère n'est pas un utilisé en logique des propositions !");
@@ -133,6 +131,59 @@ class Expression {
                 this.tableauOperande[i] = "¬" + this.tableauOperande[i];
             }
         }
+    }
+
+    fortementParanthese(StringADonner){
+        this.AnalyserString(StringADonner,0, StringADonner.length);
+        let stringResultante = "";
+        let indice;
+        let boolean = false;
+        for (let i = 0; i < this.tableauOperande.length; i++) {
+            let operateur = this.tableauOperande[i];
+            if (operateur[0] == "↔"){
+                boolean = true;
+                indice = i;
+            }
+        }
+        if (!boolean){
+            for (let i = 0; i < this.tableauOperande.length; i++) {
+                let operateur = this.tableauOperande[i];
+                if (operateur[0] == "→"){
+                    boolean = true;
+                    indice = i;
+                }
+            }
+        }
+        if (!boolean){
+            for (let i = 0; i < this.tableauOperande.length; i++) {
+                let operateur = this.tableauOperande[i];
+                if (operateur[0] == "∨"){
+                    boolean = true;
+                    indice = i;
+                }
+            }
+        }
+        if (!boolean){
+            for (let i = 0; i < this.tableauOperande.length; i++) {
+                let operateur = this.tableauOperande[i];
+                if (operateur[0] == "∧"){
+                    boolean = true;
+                    indice = i;
+                }
+            }
+        }
+        stringResultante = "(";
+        for (let i = 0; i <this.tableauOperande.length; i++) {
+            if (indice == i){
+                stringResultante += ")" +this.tableauOperande[i]+ "(";
+            }
+            else {
+                stringResultante += this.tableauOperande[i];
+            }
+        }
+        stringResultante += ")";
+        boolean = false;
+        return stringResultante;
     }
 
 }
