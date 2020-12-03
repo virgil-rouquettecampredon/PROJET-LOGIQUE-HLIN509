@@ -1,18 +1,19 @@
 class Expression {
 
-    constructor() {
+    constructor(StringADonner) {
         this.estNegatif = false;
+        this.StringADonner = StringADonner;
         this.operations = [];
     }
 
 
-    AnalyserString(StringADonner, debutString,finString){
+    AnalyserString(debutString,finString){
         let nbParanthese = 0;
         this.tableauOperande = [];
         let compteurTableau = 0;
         let debutOperande = debutString;
         for (let i = debutString; i < finString; i++) {
-            while (StringADonner[i] == "¬"){
+            while (this.StringADonner[i] == "¬"){
                 if (this.estNegatif){
                     this.estNegatif = false;
                 }
@@ -21,10 +22,10 @@ class Expression {
                 }
                 i++;
             }
-            if (StringADonner[i] == "("){
+            if (this.StringADonner[i] == "("){
                 nbParanthese++;
             }
-            if (StringADonner[i] == ")"){
+            if (this.StringADonner[i] == ")"){
                 nbParanthese--;
             }
             if (nbParanthese == 0){
@@ -33,7 +34,7 @@ class Expression {
                     this.estNegatif = false;
                 }
                 for (let j = debutOperande; j <= i; j++) {
-                    ope += StringADonner[j];
+                    ope += this.StringADonner[j];
                 }
                 this.tableauOperande.push(ope);
                 //console.log(this.tableauOperande[i]);
@@ -42,13 +43,13 @@ class Expression {
             }
         }
         if (this.tableauOperande.length === 1){
-            let operande1 = this.tableauOperande[0]
-            if (operande1.length != 1){
-                if (operande1[0] == "(" && operande1[operande1.length-1] == ")"){
-                    this.AnalyserString(operande1,1, operande1.length-1);
+            this.StringADonner = this.tableauOperande[0]
+            if (this.StringADonner.length != 1){
+                if (this.StringADonner[0] == "(" && this.StringADonner[this.StringADonner.length-1] == ")"){
+                    this.AnalyserString(1, this.StringADonner.length-1);
                 }
-               if (operande1[0] == "¬" && operande1[1] == "(" && operande1[operande1.length-1] == ")"){
-                    this.evalNegation(operande1, 2, operande1.length-1);
+               if (this.StringADonner[0] == "¬" && this.StringADonner[1] == "(" && this.StringADonner[this.StringADonner.length-1] == ")"){
+                    this.evalNegation(2, this.StringADonner.length-1);
                 }
             }
         }
@@ -90,10 +91,10 @@ class Expression {
         return operande1 + operateur + operande2;
     }
 
-    evalNegation(StringADonner, debutString, finString) {
+    evalNegation(debutString, finString) {
         let doubleImpliqNega = false;
         let caractere = "";
-        this.AnalyserString(StringADonner, debutString, finString);
+        this.AnalyserString(debutString, finString);
         for (let i = 0; i < this.tableauOperande.length; i++) {
             let operande = this.tableauOperande[i];
 
@@ -133,8 +134,8 @@ class Expression {
         }
     }
 
-    fortementParanthese(StringADonner){
-        this.AnalyserString(StringADonner,0, StringADonner.length);
+    fortementParanthese(){
+        this.AnalyserString(0, this.StringADonner.length);
         let stringResultante = "";
         let indice;
         let boolean = false;
@@ -183,7 +184,7 @@ class Expression {
         }
         stringResultante += ")";
         boolean = false;
-        return stringResultante;
+        this.StringADonner = stringResultante;
     }
 
 }
