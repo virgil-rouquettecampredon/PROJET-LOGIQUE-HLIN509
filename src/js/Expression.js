@@ -5,6 +5,7 @@ class Expression {
         this.operations = [];
     }
 
+
     AnalyserString(StringADonner, debutString,finString){
         let nbParanthese = 0;
         this.tableauOperande = [];
@@ -78,7 +79,6 @@ class Expression {
                 this.operations[2] = 2;
                 break;
             case "↔":
-                console.log("COUCOU");
                 let caractere = operande1;
                 this.operations[0] = "(" + operande1 + "→" + operande2 + ")";
                 this.operations[1] = "(" + operande2 + "→" + caractere + ")";
@@ -187,3 +187,7 @@ class Expression {
     }
 
 }
+
+//A FAIRE
+//StringADonner = param d'objet Expression (constructor)
+//Fonction estFBF
