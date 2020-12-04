@@ -1,69 +1,152 @@
-import * as TAG from "./TAG";
 /**Scenario représentant notre oracle de jeu**/
 //Role : Il va avoir le role de centraliser les informations qui lui parviendront via le
 //       joueur pour ensuite appeler l'action adéquate
 
-let ExpressionAnalyses; // String récupéré qui est donnée par le joueur
 
-/**Fonction qui va permettre à l'oracle de modéliser l'action d'un joueur (entrée)
-@param element : Element renseignant l'élément sur lequel le joueur à cliqué
-@return [][][] : une structure de données contenant pour chaque sous branche resultante le contennu de chacune des expression
-la composant ainsi qu'un booleen renseignant pour chacune d'elle si c'est une expression encore traitable ou non.
-Ex : "(a->b) OU b" => [[["a->b",true]],[["b",false]]]
-     "(a ET b ET (a->b))" => [[["a",false],["b",false],["a->b",true]]]
-*/
-export function Action_Joueur(element){
-    //Resultat
-    let res = [];
-    //On récupère la branche de l'élément (son plus proche père)
-    let parent = element.closest("." + TAG.TAG_Branche);
-    let autresExpressions = parent.getElementsByClassName(TAG.TAG_expression);
-    //Variable symbolisant le reste des expressions qui n'ont pas été affectées par le choix du joueur
-    let expParDef = [];
-    for (let i = 0; i < autresExpressions.length; i++) {
-        expParDef.push([autresExpressions[i].textContent,estTraitableEncore(autresExpressions[i].textContent)]);
-    }
-    //Traitement de l'expression sélectionnée par le joueur
-    /*Code magique*/
-    return res;
+/**======================================================================
+ * ======================== ELEMENTS IMPORTANTS =========================
+ *=======================================================================**/
+//Element ou l'expression à analyser va etre ecrite
+let el_expressionRentree = document.getElementById(TAGS.TAGID_Formule);
+//Element ou l'arbre va etre construit
+let el_arbre = document.getElementById(TAGS.TAGID_Arbre);
+//Element ou le score sera afficher (a la fin) + recap score
+let el_score = document.getElementById(TAGS.TAGID_Score);
+
+/*EXPRESSION*/
+let el_areaTxT = document.getElementById(TAGS.TAGID_AREATXT);
+
+let bouton_fin = document.getElementById(TAGS.TAGID_BTN_END);
+
+
+
+/**======================================================================
+ * ============================= FONCTIONS ==============================
+ *=======================================================================**/
+/*Fonction de départ permettant d'initialiser le début*/
+function init_Oracle(){
+    el_score.style.display = "none";
+    el_arbre.style.display = "none";
+    bouton_fin.style.display = "none";
+    el_expressionRentree.style.display = "block";
+    init_btn();
 }
 
-/**Fonction permettant de savoir si une expression sous forme d'une String est encore traitable ou non
- * @param exp : String renseignant l'expression à évaluer**/
-function estTraitableEncore(exp){
-    return false;
+/*Fonction permettant de savoir si l'evaluation de l'expression est finie ou non*/
+function isFinish(){
+    let branchesDev = document.getElementsByClassName(TAGS.TAG_BranchesATraiter);
+    return branchesDev.length == 0;
 }
 
+/*Fonction permettant de définir le comportement des différents boutons*/
+function init_btn(){
+    //SYMBOLES
+    //NON :     ¬
+    //ET :      ∧
+    //OU :      ∨
+    //EQ :      ↔
+    //IMP :     →
+    //ET
+    let el_btn_et = document.getElementById(TAGS.TAGID_BTN_ET);
+    //OU
+    let el_btn_ou = document.getElementById(TAGS.TAGID_BTN_OU);
+    //NON
+    let el_btn_non = document.getElementById(TAGS.TAGID_BTN_NON);
+    //EQ
+    let el_btn_eq = document.getElementById(TAGS.TAGID_BTN_EQ);
+    //IMP
+    let el_btn_imp = document.getElementById(TAGS.TAGID_BTN_IMP);
 
-//Fonction qui permettra d'analyser une expression sous forme d'une chaine de caractère
-/*function Analyser_Expression(StringADonner, finString, debutString){
-    let nbParanthese = 0;
-    let tableauOperande;
-    let compteurTableau = 0;
-    let debutOperande = debutString;
-    for (let i = debutString; i < tailleString; i++) {
-        if (nbParanthese == 0){
-            let ope ="";
-            for (let j = debutOperande; j <= i; j++) {
-                ope += StringADonner[j];
-            }
-            tableauOperande[compteurTableau] = ope;
-            compteurTableau++;
-            debutOperande = i+1;
-        }
-        if (StringADonner[i] == "("){
-            nbParanthese++;
-        }
-        if (StringADonner[i] == ")"){
-            nbParanthese--;
-        }
+    el_btn_et.onclick = function (event){
+        el_areaTxT.value+= "∧";
     }
-    if (tableauOperande.length == 1){
-        let operande1 = tableauOperande[0]
-        if (operande1.length != 1){
-            if (operande1[0] == "(" && operande1[operande1.length-1] == ")"){
-                Analyser_Expression(operande1,operande1.length-1, 1);
-            }
-        }
+    el_btn_ou.onclick = function (event){
+        el_areaTxT.value+= "∨";
     }
-}*/
+    el_btn_non.onclick = function (event){
+        el_areaTxT.value+= "¬";
+    }
+    el_btn_eq.onclick = function (event){
+        el_areaTxT.value+= "↔";
+    }
+    el_btn_imp.onclick = function (event){
+        el_areaTxT.value+= "→";
+    }
+}
+
+/*Fonction permettant de définir le comportement de la l'areaTXT*/
+function init_Area(){
+    document.addEventListener('keydown', (event) => {
+        let k = event.code;
+        if(k == "Enter"){
+            init_expression();
+        }
+    });
+}
+
+/*Fonction permettant de récupérer le contennu de l'expression passée par le joueur*/
+function init_expression() {
+    let contennu = el_areaTxT.value;
+    let exp = stringToArray(contennu);
+    if(exp != null){
+        init_Arbre(exp);
+        el_expressionRentree.style.display = "none";
+    }
+}
+
+/*Fonction onclick btn terminer*/
+function onclk_terminer(){
+    if(confirm("Etes-vous sur de vouloir terminer ?")) {
+        init_score();
+    }else{
+        /*let el_erreur_end = document.getElementById(TAGS.TAGID_AREAERR_END);
+        el_erreur_end.innerHTML = "";
+        let erreur = document.createElement("p");
+        erreur.innerText = message;
+        el_erreur_end.append(erreur);*/
+        console.log("PEUT PAS");
+    }
+}
+
+/**Fonction permettant d'initialiser l'arbre
+* @param expression : [][] Renseignant l'expression de départ de l'arbre. */
+function init_Arbre(expression){
+    el_arbre.style.display = "block";
+    Arbre.Creer(expression,el_arbre);
+    Arbre.init();
+}
+
+/**Fonction permettant de transformer une string expression en tableau 2D
+ * @param expression : String renseignant l'expression.*/
+function stringToArray(expression){
+    let monExpression = new Expression(expression);
+    if(monExpression.estFBF()){
+        if(monExpression.estDeveloppable()){
+            return [[expression,true]];
+        }else{
+            alert_expression("L'expression renseignée n'est pas développable");
+            return null;
+        }
+    }else{
+        alert_expression("L'expression renseignée n'est pas une FBF");
+        return null;
+    }
+}
+
+/**Fonction permettant de générer une alerte en cas de passage d'une expression incorrecte
+* @param message : String renseignant le corp du message de l'erreur*/
+function alert_expression(message){
+    let el_erreur = document.getElementById(TAGS.TAGID_AREAERR);
+    el_erreur.innerHTML = "";
+    let erreur = document.createElement("p");
+    erreur.innerText = "*"+ message;
+    el_erreur.append(erreur);
+}
+
+/**Fonction permettant d'initier la phase finale de scorring**/
+function init_score(){
+    //Calcul du score et affichage
+    el_score.style.display = "block";
+}
+
+init_Oracle();

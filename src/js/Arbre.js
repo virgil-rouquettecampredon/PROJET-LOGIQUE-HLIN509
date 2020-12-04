@@ -38,8 +38,10 @@ class Arbre{
          for (let i = 0; i <branche.length; i++) {
              //Pour chaque elements de branches, on va créer une div que l'on va inclure à la div de la branche
              //l'arbre en entier
-             let htmlelem = document.createElement("div");
-             nvllBranche.appendChild(htmlelem);
+             let divAffi = document.createElement("div");
+             let htmlelem = document.createElement("span");
+             divAffi.append(htmlelem);
+             nvllBranche.appendChild(divAffi);
              htmlelem.textContent = branche[i][0];
              //Si cette expression est encore developpable, alors
              if(branche[i][1]){
@@ -106,6 +108,9 @@ class Arbre{
                     //Fonction renseignant le comportement à adopter en cas de clic sur une expression encore developable
                     //On récupère l'élément
                     let element = event.currentTarget;
+                    //console.log(element);
+                    //console.log(element.innerText);
+
                     //On récupère la branche de l'élément
                     let parent = element.closest("." + TAGS.TAG_Branche);
                     //Si la branche n'est pas fermée par le joueur, alors
@@ -121,8 +126,9 @@ class Arbre{
                         element.onclick = null;
 
                         //Enfin, on signale à l'oracle que le joueur a réalisé une action et qu'il peut la traiter
-                        //let res = ORACLE.Action_Joueur(element);
-                        let res = [[["aOUb",true],["d",false]],[["aOUb",true],["d",false]]];
+                        let res = Arbre.stringToValuateExpression(element.innerText,parent);
+                        //console.log(res);
+
                         //On enlève toutes les expressions contennues dans parent
                         let toutesLesExpressions = parent.getElementsByClassName(TAGS.TAG_expression);
                         for (let l = 0; l < toutesLesExpressions.length; l++) {
@@ -139,12 +145,11 @@ class Arbre{
                         //Puis on récupère l'élément Branche correspondant à la branche de l'élément cliqué
                         let branche_br = Arbre.arborescence[indiceBranche];
 
-                        console.log(indiceBranche);
-                        console.log(branche_br);
-
                         //Pour chaque branche retournée par l'Oracle
                         for (let k = 0; k < res.length; k++) {
                             //Générer le wrapper
+                            console.log(res[k]);
+
                             let wrapper = document.createElement("div");
                             wrapper.classList.add(TAGS.TAG_Wrapper);
                             wrapper.id = "f"+(k+1)+parent.id;
@@ -157,105 +162,55 @@ class Arbre{
                     } else {
                         console.log("Cette branche est fermée et ne peut par conséquent pas être plus développée");
                     }
-
                 };
             }
         }
     }
 
-
-    /**Constructeur d'un Arbre
-     * @param expDep : [][] renseignant l'expression de départ (=> [["aOUb",true],["c",false]])
-     * @param HTMLelem : Element renseignant l'élément dans lequel l'arbre va s'afficher
-    constructor(expDep,HTMLelem) {
-        //Arbre.cptBranche++;
-        Arbre.addBranche(HTMLelem,null,expDep);
-    }
-    **/
-    /*
-
-//Fonction renseignant le comportement à adopter quand le joueur clic sur une branche pour la fermer
-ONCLK_brancheAFermer(event){
-    //On récupère l'élément
-    let element = event.currentTarget;
-
-    //On modifie sa branche actuelle
-    let parent = element.closest("#"+TAG_BranchesATraiter);
-    parent.classList.remove(TAG_BranchesATraiter);
-    parent.classList.add(TAG_BranchesFermees);
-
-}
-
-//Fonction permettant de générer l'élément div branche demandé puis de l'inclure dans l'arborescence
-// @param : pere renseignant le pere de la branche à générer, lui meme une branche
-// @param : branches renseignant toutes les expressions dans la ou des branche avec pour chacune
-//         d'elle l'information de si elles sont encore developpable ou non
-// @param : expressionsRestantes renseignant les expressions à mettre dans la ou les branches resultantes de
-//         l'op choisie par le joueur
-generateBranche(){
-    //Rang de l'arbre dans lequel la ou les branches à créer vont se retrouver
-    let rang = document.getElementById(""+(parseInt(pere.rang.id) + 1));
-    if(rang==null){
-        rang = document.createElement("div");
-        rang.classList.add(TAG_RangBranche);
-        rang.id = ""+(parseInt(pere.rang.id) + 1);
-    }
-
-    //Pour chaque sous branche resultante
-    for (let j = 0; j < branches.length; j++) {
-        //Nouvelle branche
-        let nvllBranche = document.createElement("div");
-        //elements encore developpable au sein de la branche ?
-        let nbencoreDev = false;
-        for (let i = 0; i <branches[j].length; i++) {
-            //Pour chaque elements de branches, on va créer une div que l'on va inclure à la div de la branche
-            //l'arbre en entier
-            let htmlelem = document.createElement("div");
-            nvllBranche.appendChild(htmlelem);
-            htmlelem.textContent = branches[j][i][0];
-            //Si cette expression est encore developpable, alors
-            if(branches[j][i][1]){
-                nbencoreDev = true;
-                htmlelem.classList.add(ORACLE.TAG_expressionComplexeATraiter);
-            }else{
-                htmlelem.classList.add(ORACLE.TAG_expressionComplexeTraitee);
+    /**Fonction qui va permettre de transformer une expression sous forme de String en un tableau des différentes branches resultantes
+     * @param expression : String renseignant l'expression
+     * @param branche : HTMLElement renseignant la branche d'ou est issue l'expression**/
+    static stringToValuateExpression(expression,branche){
+        //On va créer une expression à partir d'une chaine donnée, l'évaluer et retourner les différentes branches correspondantes
+        let expResultante = new Expression(expression);
+        expResultante.fortementParanthese();
+        expResultante.AnalyserString(0,expResultante.StringADonner.length);
+        expResultante.evalEntreDeuxOperandes(expResultante.tableauOperande[0],expResultante.tableauOperande[1],expResultante.tableauOperande[2]);
+        //Resultat
+        let expRet = [];
+        //On récupère la branche de l'élément (son plus proche père)
+        let autresExpressions = branche.getElementsByClassName(TAGS.TAG_expression);
+        //Variable symbolisant le reste des expressions qui n'ont pas été affectées par le choix du joueur
+        let expParDef = [];
+        for (let i = 0; i < autresExpressions.length; i++) {
+            if(autresExpressions[i].innerText != expression){
+                if(autresExpressions[i].classList.contains(TAGS.TAG_expressionComplexeATraiter)){
+                    expParDef.push([autresExpressions[i].innerText,true]);
+                }else{
+                    expParDef.push([autresExpressions[i].innerText,false]);
+                }
             }
-            //Dans tous les cas, c'est une expression :
-            htmlelem.classList.add(ORACLE.TAG_expression);
         }
 
-        //Pour chaques expressions à inclure dans chacune des expressions resultantes
-        for (let k = 0; k < expressionsRestantes.length; k++) {
-            nvllBranche.appendChild(expressionsRestantes[k]);
-        }
+        //Booleen utiles pour connaitre le dev des sous exp
+        let expOP1 = new Expression(expResultante.operations[0]);
+        let expOP2 = new Expression(expResultante.operations[1]);
+        let bool1 = expOP1.estDeveloppable();
+        let bool2 = expOP2.estDeveloppable();
 
-        //S'il reste au moins une expression encore develloppable dans la nouvlle branche créée
-        if(nbencoreDev){
-            nvllBranche.classList.add(TAG_BranchesATraiter);
-        }else{
-            nvllBranche.classList.add(TAG_BranchesTraitees);
+        if(expResultante.operations[2] == 1){
+            expParDef.push([expResultante.operations[0],bool1]);
+            expParDef.push([expResultante.operations[1],bool2]);
+            expRet.push(expParDef);
         }
-        nvllBranche.classList.add(TAG_Branche);
-        //L'ID d'une nouvelle branche correspond à son ordre d'apparation dans l'arborescence
-        nvllBranche.id = ""+this.arborescence.length;
-        let branche = new Branche(pere.contenu,nvllBranche,rang);
-        this.arborescence.push(branche);
-        this.afficherNouvelleBranche(branche);
+        if(expResultante.operations[2] == 2){
+            let br1  = expParDef.slice();
+            br1.push([expResultante.operations[0],bool1]);
+            let br2  = expParDef.slice();
+            br2.push([expResultante.operations[1],bool2]);
+            expRet.push(br1);
+            expRet.push(br2);
+        }
+        return expRet;
     }
-}
-
-
-//Fonction permettant d'afficher à l'écran une nouvelle Branche
-afficherNouvelleBranche(branche){
-    //On récupère toutes les branches de ce rang
-    branche.rang.getElementsByClassName(TAG_Branche);
-    branche.rang.appendChild(branche);
-    //ligne entre pere et fils
-    let liaison = document.createElement("canvas");
-    let ctx_liaison = liaison.getContext("2d");
-    ctx_liaison.beginPath();
-    ctx_liaison.moveTo();
-}*/
-
-
 }

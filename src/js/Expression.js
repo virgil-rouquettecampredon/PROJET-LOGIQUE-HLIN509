@@ -1,3 +1,10 @@
+//SYMBOLES
+//NON : ¬
+//ET : ∧
+//OU : ∨
+//EQ : ↔
+//IMP : →
+
 class Expression {
 
     constructor(StringADonner) {
@@ -6,6 +13,15 @@ class Expression {
         this.operations = [];
     }
 
+    estFBF(){
+        return true;
+    }
+
+    estDeveloppable(){
+        this.fortementParanthese();
+        this.AnalyserString(0,this.StringADonner.length);
+        return this.tableauOperande.length>=3;
+    }
 
     AnalyserString(debutString,finString){
         let nbParanthese = 0;
@@ -57,6 +73,9 @@ class Expression {
 
     evalEntreDeuxOperandes(operande1, operateur, operande2){
         let n = 0;
+        operande1 = operande1.slice(1,operande1.length-1);
+        operande2 = operande2.slice(1,operande2.length-1);
+
         switch (operateur[0]){
             case "∧":
                 this.operations[0] = operande1;
@@ -81,14 +100,13 @@ class Expression {
                 break;
             case "↔":
                 let caractere = operande1;
-                this.operations[0] = "(" + operande1 + "→" + operande2 + ")";
-                this.operations[1] = "(" + operande2 + "→" + caractere + ")";
+                this.operations[0] = operande1 + "→" + operande2;
+                this.operations[1] = operande2 + "→" + caractere;
                 this.operations[2] = 1;
                 break;
             default:
                 alert("Un des caractère n'est pas un utilisé en logique des propositions !");
         }
-        return operande1 + operateur + operande2;
     }
 
     evalNegation(debutString, finString) {

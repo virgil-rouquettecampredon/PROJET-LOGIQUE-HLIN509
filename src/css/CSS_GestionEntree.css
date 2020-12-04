@@ -1,0 +1,232 @@
+body{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+div#Formule{
+    background-size: 100% ;
+    max-width: 100%;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    /*font-family: 'East Sea Dokdo', cursive;*/
+    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Teko', sans-serif;*/
+}
+
+div#Formule::after{
+    content: "";
+    background-color: black;
+    position: absolute;
+    height: 100%; width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -2;
+}
+
+div#Formule::before{
+    content: "";
+    position: absolute;
+    height: 100%; width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent,rgba(0,0,0,0.8)) ,url("../img/fond.jpg") center center;
+    background-size: cover;
+    z-index: -1; /* Keep the background behind the content */
+    -webkit-filter: blur(8px);
+    -webkit-background-size: cover; /* pour Chrome et Safari */
+    -moz-background-size: cover; /* pour Firefox */
+    -o-background-size: cover;
+    filter: blur(5px);
+}
+
+div#Formule div#name{
+    transform: translateY(-100%);
+    font-family: 'East Sea Dokdo', cursive;
+    font-size: 1000%;
+    color: var(--bg-expression-hover);
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    opacity: 0;
+    width: 100%;
+    text-shadow: var(--text-shadow);
+    animation-name: aparitionHaut;
+    animation-delay: .7s;
+    animation-duration: 1.7s;
+    animation-timing-function: cubic-bezier(0, 1.02, 0.34, 1.13);
+    animation-fill-mode: forwards;
+
+}
+@keyframes aparitionHaut {
+    90%{
+        opacity: 1;
+    }
+    100%{
+        transform: translate(0);
+        opacity: 1;
+    }
+}
+
+div#Formule div#elementsARentrer div#elem{
+    margin-top: 0;
+    animation: aparition;
+    animation-delay: .5s;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+div#Formule div#elementsARentrer {
+    font-size: 21px;
+    position: absolute;
+    box-sizing: border-box;
+    overflow: hidden;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    animation: aparitionNom;
+    height: 0;
+    animation-delay: .5s;
+    animation-duration: 1.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    background-color: var(--bg-expression-hover);
+    box-shadow: var(--box-shadow);
+}
+
+div#Formule div#elementsARentrer span#n1{
+    margin-right: 25%;
+    color: var(--main_color);
+    transition: text-shadow .5s;
+}
+
+div#Formule div#elementsARentrer span#n2{
+    margin-left: 25%;
+    color: var(--main_color);
+    transition: text-shadow .5s;
+}
+
+div#Formule div#elementsARentrer span#n2:hover{
+    text-shadow: 1px 0 0 rgba(0, 0, 0, 0.4);
+}
+
+div#Formule div#elementsARentrer span#n1:hover{
+    text-shadow: 1px 0 0 rgba(0, 0, 0, 0.4);
+}
+
+@keyframes aparition {
+    100%{
+        margin-top: 15px;
+    }
+}
+
+@keyframes aparitionNom {
+    100%{
+        height: 50%;
+        top: 50%;
+        padding-top: 20px;
+    }
+}
+
+div#Formule div#elementsARentrer div#elem label{
+    display: block;
+    font-size: 50px;
+    margin-bottom: 45px;
+    position: relative;
+}
+
+div#Formule div#elementsARentrer div#elem label::after{
+    content: "";
+    height: 10%;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 40%;
+    background: black;
+    width: 20%;
+}
+
+div#Formule div#elementsARentrer div#elem #area_exp{
+    border: none;
+    background-color: white;
+    font-size: 16px;
+    padding: 15px 20px;
+    width: 25%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+div#Formule div#elementsARentrer div#elem #area_exp:hover {
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+}
+
+div#Formule div#elementsARentrer div#elem button#valid{
+    padding: 15px 20px;
+    margin-left: -5px;
+    border: none;
+    font-size: 16px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: white;
+    color: black;
+    transition: background-color .2s, color .1s;
+}
+
+div#Formule div#elementsARentrer div#elem button#valid:hover{
+    background-color: var(--main_color);
+    color: var(--bg-expression-hover);
+}
+
+div#Formule div#elementsARentrer div#elem div#btns{
+    margin-top: 20px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#Formule div#elementsARentrer div#elem div#btns button{
+    font-weight: bold;
+    font-size: 25px;
+    padding: 10px;
+    background-color: var(--main_color);
+    color: var(--bg-expression-hover);
+    border: 2px solid black;
+    border-radius: 10%;
+    width: 10%;
+    height: auto;
+    margin-left: 5px;
+    margin-right: 5px;
+    transition: color.1s,background-color.2s;
+}
+
+div#Formule div#elementsARentrer div#elem div#btns button:hover{
+    background-color: black;
+    color: var(--main_color);
+}
+
+div#Formule div#elementsARentrer div#elem div#area_err{
+    color: var(--branche_ferme_color);
+    font-size: 10px;
+    font-style: italic;
+    padding: 0;
+    margin: 0;
+}
+
+input[type="text"]:focus {
+    outline:none;
+}
+
+button:focus{
+    outline: none;
+}

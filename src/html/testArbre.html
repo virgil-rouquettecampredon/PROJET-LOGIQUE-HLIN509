@@ -5,16 +5,42 @@
     <title>TEST</title>
 
     <link rel="stylesheet" href="../css/CSS_GestionArbre.css">
+    <link rel="stylesheet" href="../css/CSS_GestionEntree.css">
 
     <!--SCRIPT-->
     <script src="../js/TAG.js"></script>
     <script src="../js/Arbre.js"></script>
     <script src="../js/Branche.js"></script>
+    <script src="../js/Expression.js"></script>
+    <script defer src="../js/Oracle.js"></script>
 </head>
 
 <body>
+<div id="Formule">
+    <div id="name">SUPER ORACLE</div>
+    <div id="elementsARentrer">
+        <span id="n1">Erwan Reinders</span><span id="n2">Virgil Rouquette Campredon</span>
+        <div id="elem">
+            <label for="area_exp">Expression</label><input type="text" required minlength="3" id="area_exp" placeholder="Expression à évaluer ...">
+            <button id="valid" class="btn" type="button" onclick="init_expression()">Soumettre</button>
+            <div id="area_err"></div>
+            <div id="btns">
+                <button id="btn_non" class="btn_symb" type="button">¬</button>
+                <button id="btn_et" class="btn_symb" type="button">∧</button>
+                <button id="btn_ou" class="btn_symb" type="button">∨</button>
+                <button id="btn_imp" class="btn_symb" type="button">→</button>
+                <button id="btn_eq" class="btn_symb" type="button">↔</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="Arbre">
-
+</div>
+<div id="btn_end">
+    <button id="end" class="btn" type="button" onclick="onclk_terminer()">Terminer</button>
+</div>
+<div id="Score">
+    NULL
 </div>
 </body>
 </html>

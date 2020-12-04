@@ -1,8 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&family=Roboto:wght@700&family=Teko:wght@300;700&display=swap');
+:root{
+    --main_color : #0FE2A3;
+    --branche_color : #544427;
+    --branche_traitee_color : #8C7140;
+    --branche_ferme_color : #F7C32E;
+    --bg-expression-hover : #F1F5F2;
+    --shadow-arbre : 7px 7px 18px 0px rgba(0,0,0,0.39);
+    --shadow-arbre-hoover: 7px 7px 18px 0px rgba(0,0,0,0.39), 7px 7px 18px 0px rgba(84,68,39,0.52);
+    --text-shadow : 2px 1px 2px rgba(0, 0, 0, 1),7px 1px 10px rgba(15, 226, 163, 1),7px 1px 20px rgba(255, 255, 255, .5);
+    --box-shadow : 0px -2px 14px 0px #000000, 0px -5px 19px 0px rgba(0,0,0,0.5);
+
+}
+
 /*Pour l'arbre*/
 div#Arbre{
     width: auto;
     height: auto;
     text-align: center;
+    /*font-family: 'East Sea Dokdo', cursive;*/
+    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Teko', sans-serif;*/
+    font-size: xx-large;
 }
 
 /*Pour tous les wrapper*/
@@ -16,42 +34,86 @@ div#Arbre div.wrapper{
 /*Pour toutes les branches*/
 div#Arbre div.wrapper div.Branche {
     max-width: 50%;
+    box-sizing: border-box;
     min-width: auto;
     height: auto;
     margin-left: auto;
     margin-right: auto;
-    color: black;
+    color: var(--branche_color);
     display: block;
-    border: 2px solid black;
+    border: 4px solid transparent;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: var(--shadow-arbre);
+    transition: box-shadow .2s,border-color .1s;
+    transition-timing-function: cubic-bezier(0.5, 0.5, 1.0, 1.0);
+}
+div#Arbre div.wrapper div.Branche:hover{
+    box-shadow: var(--shadow-arbre-hoover);
+    border-color: var(--branche_color);
 }
 
 /*Pour toutes les branches qui ne sont plus a traiter*/
 div#Arbre div.wrapper div.Branche.BrancheTraitee{
-    color: grey;
-    border-color: grey;
+    color: var(--branche_traitee_color);
+    border-color: var(--branche_traitee_color);
+}
+div#Arbre div.wrapper div.Branche.BrancheTraitee:hover{
+    box-shadow: var(--shadow-arbre);
+    border-color: var(--branche_traitee_color);
 }
 
 /*Pour toutes les branches qui sont fermées*/
 div#Arbre div.wrapper div.Branche.BrancheFermee{
-    border: 2px solid red;
+    border-color: var(--branche_ferme_color);
+    color: var(--branche_traitee_color);
+}
+
+div#Arbre div.wrapper div.Branche div{
+    box-sizing: inherit;
+}
+
+div#Arbre div.wrapper div.Branche.BrancheTraitee div span.expression::after, div#Arbre div.wrapper div.Branche.BracheATraiter div span.expression::after{
+    content: '';
+    height: 50%;
+    position: absolute;
+    bottom: 12.5%;
+    right: 50%;
+    left: 50%;
+    background: var(--bg-expression-hover);
+    z-index: -1;
+    transition: right .5s,left .5s;
+}
+
+div#Arbre div.wrapper div.Branche.BrancheTraitee div span.expression.expressionComplexeATraiter::after, div#Arbre div.wrapper div.Branche.BracheATraiter div span.expression.expressionComplexeATraiter::after{
+    background: var(--main_color);
+}
+
+div#Arbre div.wrapper div.Branche div:hover span.expression::after{
+    right: 0;
+    left: 0;
+}
+
+div#Arbre div.wrapper div.Branche div:hover span.expression.expressionComplexeTraitee{
+    border-bottom-color: black;
 }
 
 /*Pour toutes les expressions*/
-div#Arbre div.wrapper div.Branche div.expression{
+div#Arbre div.wrapper div.Branche div span.expression{
     text-align: center;
-    width: 100%;
-    height: auto;
+    display : inline-block;
+    margin-right: auto;
+    margin-left: auto;
+    width: border-box;
+    padding: 5px;
+    cursor: default;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color .2s, color .1s;
+    position: relative;
 }
 
-/*Pour toutes les expressions qui sont encore developable*/
-div#Arbre div.wrapper div.Branche div.expression.expressionComplexeATraiter{
-    background-color: transparent;
-    transition: background-color .5s;
-}
-
-div#Arbre div.wrapper div.Branche div.expression.expressionComplexeATraiter:hover{
-    background-color: bisque;
-    cursor: auto;
+div#Arbre div.wrapper div.Branche div span.expression.expressionComplexeATraiter:hover{
+    cursor: pointer;
 }
 
 /*Pour tous les canvas*/
