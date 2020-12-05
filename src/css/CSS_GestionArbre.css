@@ -9,7 +9,7 @@
     --shadow-arbre-hoover: 7px 7px 18px 0px rgba(0,0,0,0.39), 7px 7px 18px 0px rgba(84,68,39,0.52);
     --text-shadow : 2px 1px 2px rgba(0, 0, 0, 1),7px 1px 10px rgba(15, 226, 163, 1),7px 1px 20px rgba(255, 255, 255, .5);
     --box-shadow : 0px -2px 14px 0px #000000, 0px -5px 19px 0px rgba(0,0,0,0.5);
-
+    --box-shadow-bis : 15px 15px 15px 20px rgba(32, 33, 36, .28);
 }
 
 /*Pour l'arbre*/
@@ -21,6 +21,7 @@ div#Arbre{
     font-family: 'Roboto', sans-serif;
     /*font-family: 'Teko', sans-serif;*/
     font-size: xx-large;
+    margin-bottom: 5%;
 }
 
 /*Pour tous les wrapper*/
@@ -33,9 +34,9 @@ div#Arbre div.wrapper{
 
 /*Pour toutes les branches*/
 div#Arbre div.wrapper div.Branche {
-    max-width: 50%;
+    max-width: 75%;
+    min-width: 200px;
     box-sizing: border-box;
-    min-width: auto;
     height: auto;
     margin-left: auto;
     margin-right: auto;
@@ -47,6 +48,7 @@ div#Arbre div.wrapper div.Branche {
     box-shadow: var(--shadow-arbre);
     transition: box-shadow .2s,border-color .1s;
     transition-timing-function: cubic-bezier(0.5, 0.5, 1.0, 1.0);
+    overflow: auto;
 }
 div#Arbre div.wrapper div.Branche:hover{
     box-shadow: var(--shadow-arbre-hoover);
@@ -127,7 +129,33 @@ div#Arbre, div#Arbre div.wrapper {
     position: relative;
 }
 
-/*A FAIRE
-DEF classe pour wrapper fils et wrapper branche
-GESTION canvas dessin
-Mise en place taille minimale pour wrapper branche et wrapper fils*/
+
+div#btn_end{
+    display: block;
+    position: fixed;
+    box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.45);
+    background-color: black;
+    width: 110%;
+    height: auto;
+    bottom: 0;
+    right: -5%;
+    left: -5%;
+    z-index: 20;
+}
+
+div#btn_end button{
+    display: block;
+    margin: 5px auto;
+    padding: 1px;
+    color: var(--bg-expression-hover);
+    background-color: transparent;
+    border: 3px solid var(--bg-expression-hover);
+    transition: color .2s, border-bottom-color .1s;
+}
+
+div#btn_end button:hover{
+    color: var(--main_color);
+    border: 3px solid var(--main_color);
+    cursor: pointer;
+}
+

@@ -60,6 +60,23 @@ class Arbre{
             nvllBranche.classList.add(TAGS.TAG_BranchesTraitees);
         }
         nvllBranche.classList.add(TAGS.TAG_Branche);
+
+        nvllBranche.oncontextmenu = function(event){
+            return false;
+        };
+        nvllBranche.addEventListener("mousedown", (event)=> {
+            if (event.button != 2) {
+                console.log("pas clic droit");
+                return;
+            } else {
+                console.log("clic droit");
+                let elem = event.currentTarget;
+                elem.classList.remove(TAGS.TAG_expressionComplexeATraiter);
+                elem.classList.remove(TAGS.TAG_BranchesTraitees);
+                elem.classList.add(TAGS.TAG_BranchesFermees);
+            }
+        },false);
+
         //L'ID d'une nouvelle branche correspond à son ordre d'apparation dans l'arborescence
         nvllBranche.id = "b"+(Arbre.arborescence.length+1);
 

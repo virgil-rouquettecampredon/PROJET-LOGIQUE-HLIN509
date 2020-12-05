@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>TEST</title>
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <link rel="stylesheet" href="../css/CSS_GestionArbre.css">
     <link rel="stylesheet" href="../css/CSS_GestionEntree.css">
 
@@ -33,11 +35,17 @@
             </div>
         </div>
     </div>
+    <div id="rulesIcon" onclick="initRegle()">
+        <div>
+            <i class="large material-icons">import_contacts</i>
+        </div>
+    </div>
     <div id="regle">
-        <span id="titreRegle">
-            Regles du jeu
-        </span>
-        <p>
+        <div>
+            <span id="titreRegle">
+                Regles du jeu
+            </span>
+            <p>
             Bonjour et bienvennue à l'authentique version du <span class="important">Super Oracle</span>.
             <br>Serrez-vous capable de le défier ?
             <br>Pour ce faire, vous allez devoir commencer par lui renseigner une formule de logique propositionnelle.
@@ -49,8 +57,10 @@
             <br>A tout moment du jeu, si vous observez une <span class="important">contradiction</span> dans l'une des branches, il vous suffira de la signaler à l’Oracle en faisant un <span class="important">clic droit sur la branche</span> en question.
             <br>Le partie prend alors fin lorsque toutes les contradictions auront été détectées.
             <br>Il vous est également possible à tout moment de terminer la partie si vous pensez avoir fini, en cliquant sur le bouton  <span class="important">terminer</span> en bas de page.
-            <br>En fin dde partie, un récapitulatif de votre performance vous serra affiché.
+            <br>En fin de partie, un récapitulatif de votre performance vous serra affiché.
         </p>
+            <div id="close" onclick="closeRegle()"><i class="large material-icons">close</i></div>
+        </div>
     </div>
 </div>
 <div id="Arbre">
@@ -63,4 +73,16 @@
     NULL
 </div>
 </body>
+<script>
+    /**Fonction permettant d'initialiser le comportement d'affichage ou non des regles de jeu**/
+    function initRegle(){
+        let el_affregle = document.getElementById("regle");
+        el_affregle.style.display = "flex";
+    }
+
+    function closeRegle() {
+        let el_affregle = document.getElementById("regle");
+        el_affregle.style.display = "none";
+    }
+</script>
 </html>

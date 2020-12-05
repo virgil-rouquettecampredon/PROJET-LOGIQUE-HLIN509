@@ -77,7 +77,6 @@ div#Formule div#name{
     animation-duration: 1.7s;
     animation-timing-function: cubic-bezier(0, 1.02, 0.34, 1.13);
     animation-fill-mode: forwards;
-
 }
 @keyframes aparitionHaut {
     90%{
@@ -196,6 +195,7 @@ div#Formule div#elementsARentrer div#elem button#valid{
 div#Formule div#elementsARentrer div#elem button#valid:hover{
     background-color: var(--main_color);
     color: var(--bg-expression-hover);
+    cursor: pointer;
 }
 
 div#Formule div#elementsARentrer div#elem div#btns{
@@ -223,6 +223,7 @@ div#Formule div#elementsARentrer div#elem div#btns button{
 div#Formule div#elementsARentrer div#elem div#btns button:hover{
     background-color: black;
     color: var(--main_color);
+    cursor: pointer;
 }
 
 div#Formule div#elementsARentrer div#elem div#area_err{
@@ -239,4 +240,122 @@ input[type="text"]:focus {
 
 button:focus{
     outline: none;
+}
+
+/*Gestion regles*/
+div#Formule div#rulesIcon{
+    display: block;
+    position: absolute;
+    box-sizing: content-box;
+    overflow: hidden;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    color: white;
+    background-color: var(--main_color);
+    border-radius: 50% 0 0 0;
+    animation: ruleApparition;
+    animation-duration: .4s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+    vertical-align: center;
+    text-align: center;
+    box-shadow: var(--box-shadow-bis);
+    transition: color .1s, background-color .2s;
+}
+
+@keyframes ruleApparition {
+    to{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+div#Formule div#rulesIcon:hover{
+    color: var(--main_color);
+    background-color: black;
+    border-left: 2px solid var(--main_color);
+    border-top: 2px solid var(--main_color);
+    cursor: pointer;
+}
+
+div#Formule div#rulesIcon div {
+    padding: 15px 7px 7px 15px;
+}
+
+div#Formule div#regle{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 20;
+}
+
+div#Formule div#regle div{
+    width: 80%;
+    vertical-align: center;
+    height: 80%;
+    margin: auto;
+    background-color: var(--bg-expression-hover);
+    border-radius: 20px;
+    border: 5px solid black;
+    position: relative;
+    text-align: justify;
+}
+
+div#Formule div#regle div span#titreRegle{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    font-size: 50px;
+    color: var(--main_color);
+    text-align: center;
+    padding-top: 5%;
+    position: relative;
+}
+
+div#Formule div#regle div p{
+    display: block;
+    box-sizing: inherit;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 3%;
+    border-left: 4px solid var(--main_color);
+    padding-left: 10px;
+}
+
+div#Formule div#regle div p span.important{
+    color: var(--main_color);
+    font-weight: bolder;
+}
+
+div#Formule div#regle div div#close{
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    padding: 2px;
+    border: 2px solid black;
+    background-color: darkred;
+    color: white;
+    height: auto;
+    width: auto;
+    transition: color .2s;
+    display: flex;
+}
+
+div#Formule div#regle div div#close i{
+    margin: auto;
+}
+
+div#Formule div#regle div div#close:hover{
+    color: black;
+    cursor: pointer;
 }

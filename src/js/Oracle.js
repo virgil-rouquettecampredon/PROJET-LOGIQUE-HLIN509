@@ -95,6 +95,7 @@ function init_expression() {
     if(exp != null){
         init_Arbre(exp);
         el_expressionRentree.style.display = "none";
+        bouton_fin.style.display = "block";
     }
 }
 
@@ -152,5 +153,6 @@ function init_score(){
     //Calcul du score et affichage
     el_score.style.display = "block";
 }
+
 
 init_Oracle();
