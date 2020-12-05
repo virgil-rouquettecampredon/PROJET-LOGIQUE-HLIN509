@@ -23,6 +23,9 @@ let bouton_fin = document.getElementById(TAGS.TAGID_BTN_END);
 /**======================================================================
  * ============================= FONCTIONS ==============================
  *=======================================================================**/
+function initNegation(expression){
+    expression = "¬(" + this.expression + ")";
+}
 /*Fonction de départ permettant d'initialiser le début*/
 function init_Oracle(){
     el_score.style.display = "none";
@@ -87,6 +90,7 @@ function init_Area(){
 /*Fonction permettant de récupérer le contennu de l'expression passée par le joueur*/
 function init_expression() {
     let contennu = el_areaTxT.value;
+    initNegation(contennu);
     let exp = stringToArray(contennu);
     if(exp != null){
         init_Arbre(exp);
