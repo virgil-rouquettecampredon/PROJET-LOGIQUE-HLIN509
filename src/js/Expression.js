@@ -14,7 +14,50 @@ class Expression {
     }
 
     estFBF(){
-        return true;
+        let parantheseOuvrante = false;
+        let nbParanthese = 0;
+        let operateur = ["∧","∨","↔","→"];
+        let paranthese = ["(",")"];
+        let negation = ["¬"];
+        let lettre= ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+        for (let i = 0; i < this.StringADonner.length; i++) {
+            if (this.StringADonner[i] == ")"){
+                nbParanthese--;
+            }
+            if ( !(lettre.includes(this.StringADonner[i]) || operateur.includes(this.StringADonner[i]) || paranthese.includes(this.StringADonner[i])|| negation.includes(this.StringADonner[i]))){     //caractere n'étant pas dans la logique des propositions
+                console.log("autre caractere");
+                return false;
+            }
+            if (this.StringADonner[i] == "("){
+                parantheseOuvrante = true;
+                nbParanthese++;
+            }
+
+            if (this.StringADonner[i] == ")" && !parantheseOuvrante){        // si la formule commence par ")"...
+                console.log("ouvranteBegin");
+                return false;
+            }
+            else if (this.StringADonner[i] == ")" && this.StringADonner[i-1] == "(" ){  // si on a une paranthese vide
+                console.log("vide");
+                return false;
+            }
+            if (i+1 != this.StringADonner.length) {
+                if (operateur.includes(this.StringADonner[i]) && !(lettre.includes(this.StringADonner[i+1]) || this.StringADonner[i+1] == "(" || negation.includes(this.StringADonner[i+1]))){
+                    console.log("operateur");
+                    return false;
+                }
+                if (lettre.includes(this.StringADonner[i]) && !(operateur.includes(this.StringADonner[i+1]) || this.StringADonner[i+1] == ")")){
+                    console.log("lettre");
+                    return false;
+                }
+                if (negation.includes(this.StringADonner[i]) && !(lettre.includes(this.StringADonner[i+1]) || this.StringADonner[i+1] == "(")){
+                    console.log("negation");
+                    return false;
+                }
+            }      //A VERIFIER
+        }
+        console.log("nbParanthese");
+        return nbParanthese === 0;      // si il y a nombre de paranthese ouvrante != paranthese fermante
     }
 
     estDeveloppable(){
