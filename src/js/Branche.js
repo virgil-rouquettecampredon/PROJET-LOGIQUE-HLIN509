@@ -35,7 +35,7 @@ class Branche {
             let intDeb = 1;
             while (intDeb<=this.fils.length*2){
                 let curXB = largeurPxCanvas*intDeb/(this.fils.length*2);
-                Branche.dessinerLiaison([[largeurPxCanvas/2,0],[curXB,hauteurPxCanvas]],ctxDessin);
+                Branche.dessinerLiaison([[largeurPxCanvas/2,0],[curXB,hauteurPxCanvas]],ctxDessin,this.fils.length==1);
                 intDeb = intDeb + 2;
             }
         }else{
@@ -106,10 +106,13 @@ class Branche {
 
     /**Fonction permettant de dessiner une liaison dans un canvas 2D
      * @param coords : [][] renseignant les coordonnées des points extrémitées du trait
-     * @param context : CanvasRenderingContext2D ou dessiner*/
-    static dessinerLiaison(coords, context){
+     * @param context : CanvasRenderingContext2D ou dessiner
+     * @param unique : boolean renseignant si la liaison est la seule a dessiner ou non, utile pour def l'epaisseur*/
+    static dessinerLiaison(coords, context,unique){
         let epaisseur = 5;
-
+        if(unique){
+            epaisseur = epaisseur/5;
+        }
         context.beginPath();
         context.fillStyle = "#544427";
         context.moveTo(coords[0][0]-epaisseur/2, coords[0][1]);

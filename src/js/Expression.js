@@ -60,6 +60,7 @@ class Expression {
         return nbParanthese === 0;      // si il y a nombre de paranthese ouvrante != paranthese fermante
     }
 
+    //A dev plus
     estDeveloppable(){
         this.fortementParanthese();
         this.AnalyserString(0,this.StringADonner.length);

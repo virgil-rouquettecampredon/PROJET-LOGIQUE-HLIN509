@@ -41,7 +41,7 @@ div#Arbre div.wrapper div.Branche {
     margin-right: auto;
     color: var(--branche_color);
     display: block;
-    border: 4px solid transparent;
+    border: 4px solid var(--branche_traitee_color);
     border-radius: 10px;
     padding: 5px;
     box-shadow: var(--shadow-arbre);
@@ -56,7 +56,6 @@ div#Arbre div.wrapper div.Branche:hover{
 /*Pour toutes les branches qui ne sont plus a traiter*/
 div#Arbre div.wrapper div.Branche.BrancheTraitee{
     color: var(--branche_traitee_color);
-    border-color: var(--branche_traitee_color);
 }
 div#Arbre div.wrapper div.Branche.BrancheTraitee:hover{
     box-shadow: var(--shadow-arbre);
@@ -104,9 +103,9 @@ div#Arbre div.wrapper div.Branche div span.expression{
     padding: 5px;
     cursor: default;
     border: 2px solid transparent;
-    transition: border-color .2s, color .1s;
+    transition: border-color .1s, color .1s;
     transition-timing-function: cubic-bezier(0, 0.9, 0, 1.02),ease;
-    transition-delay: .2s,.1s;
+    transition-delay: .1s,.1s;
     position: relative;
 }
 

@@ -62,19 +62,19 @@ function init_btn(){
 
     el_btn_et.onclick = function (event){
         el_areaTxT.value+= "∧";
-    }
+    };
     el_btn_ou.onclick = function (event){
         el_areaTxT.value+= "∨";
-    }
+    };
     el_btn_non.onclick = function (event){
         el_areaTxT.value+= "¬";
-    }
+    };
     el_btn_eq.onclick = function (event){
         el_areaTxT.value+= "↔";
-    }
+    };
     el_btn_imp.onclick = function (event){
         el_areaTxT.value+= "→";
-    }
+    };
 }
 
 /*Fonction permettant de définir le comportement de la l'areaTXT*/
