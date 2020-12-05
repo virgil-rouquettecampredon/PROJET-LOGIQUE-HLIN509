@@ -75,14 +75,14 @@ div#Arbre div.wrapper div.Branche div{
 
 div#Arbre div.wrapper div.Branche.BrancheTraitee div span.expression::after, div#Arbre div.wrapper div.Branche.BracheATraiter div span.expression::after{
     content: '';
-    height: 50%;
+    height: 100%;
     position: absolute;
-    bottom: 12.5%;
+    bottom: 0;
     right: 50%;
     left: 50%;
     background: var(--bg-expression-hover);
     z-index: -1;
-    transition: right .5s,left .5s;
+    transition: right .3s,left .3s;
 }
 
 div#Arbre div.wrapper div.Branche.BrancheTraitee div span.expression.expressionComplexeATraiter::after, div#Arbre div.wrapper div.Branche.BracheATraiter div span.expression.expressionComplexeATraiter::after{
@@ -94,10 +94,6 @@ div#Arbre div.wrapper div.Branche div:hover span.expression::after{
     left: 0;
 }
 
-div#Arbre div.wrapper div.Branche div:hover span.expression.expressionComplexeTraitee{
-    border-bottom-color: black;
-}
-
 /*Pour toutes les expressions*/
 div#Arbre div.wrapper div.Branche div span.expression{
     text-align: center;
@@ -107,18 +103,29 @@ div#Arbre div.wrapper div.Branche div span.expression{
     width: border-box;
     padding: 5px;
     cursor: default;
-    border-bottom: 2px solid transparent;
-    transition: border-bottom-color .2s, color .1s;
+    border: 2px solid transparent;
+    transition: border-color .2s, color .1s;
+    transition-timing-function: cubic-bezier(0, 0.9, 0, 1.02),ease;
+    transition-delay: .2s,.1s;
     position: relative;
 }
 
 div#Arbre div.wrapper div.Branche div span.expression.expressionComplexeATraiter:hover{
     cursor: pointer;
+    border-color: black;
+    color: black;
 }
 
+
 /*Pour tous les canvas*/
-div#Arbre div.wrapper canvas.liaison{
+div#Arbre canvas.liaison{
     position: absolute;
+    z-index: 10;
+    display: block;
+}
+
+div#Arbre, div#Arbre div.wrapper {
+    position: relative;
 }
 
 /*A FAIRE
