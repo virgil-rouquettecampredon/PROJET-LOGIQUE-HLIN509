@@ -54,6 +54,10 @@ class Expression {
                     console.log("negation");
                     return false;
                 }
+                if (this.StringADonner[i] == "(" && !(lettre.includes(this.StringADonner[i+1]) || this.StringADonner[i+1] == "(")){
+                    console.log("parantheseOuvrante");
+                    return false;
+                }
             }      //A VERIFIER
         }
         console.log("nbParanthese");
