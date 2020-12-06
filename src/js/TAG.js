@@ -18,6 +18,7 @@ const TAGS = {
     /**TAG des branches déjà traitées par le joueur : **/                   TAG_BranchesTraitees : "BrancheTraitee",
     /**TAG des branches fermées par le joueur : **/                         TAG_BranchesFermees : "BrancheFermee",
     /**TAG des branches **/                                                 TAG_Branche : "Branche",
+    /**TAG des branches fermable**/                                         TAG_BrancheFermable : "BrancheFermable",
     /**TAG des rangs des branches **/                                       TAG_RangBranche : "rang",/*DEPRECATED*/
     /**TAG des wrapper**/                                                   TAG_Wrapper : "wrapper",
 

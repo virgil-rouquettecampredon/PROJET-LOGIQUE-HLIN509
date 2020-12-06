@@ -25,7 +25,8 @@ class Arbre{
      static addBranche(container,pere,branche){
          //Arbre.cptBranche++;
          //Générer le wrapper
-         let wrapper = document.createElement("div");
+        //PATCH
+        let wrapper = document.createElement("div");
          wrapper.classList.add(TAGS.TAG_Wrapper);
          wrapper.id = "wb" + (Arbre.arborescence.length + 1);
          wrapper.style.width = "100%";
@@ -60,6 +61,7 @@ class Arbre{
             nvllBranche.classList.add(TAGS.TAG_BranchesTraitees);
         }
         nvllBranche.classList.add(TAGS.TAG_Branche);
+        nvllBranche.classList.add(TAGS.TAG_BrancheFermable);
 
         nvllBranche.oncontextmenu = function(event){
             return false;
@@ -71,9 +73,19 @@ class Arbre{
             } else {
                 console.log("clic droit");
                 let elem = event.currentTarget;
-                elem.classList.remove(TAGS.TAG_expressionComplexeATraiter);
-                elem.classList.remove(TAGS.TAG_BranchesTraitees);
-                elem.classList.add(TAGS.TAG_BranchesFermees);
+                if(elem.classList.contains(TAGS.TAG_BrancheFermable)) {
+                    if (!elem.classList.contains(TAGS.TAG_BranchesFermees)) {
+                        //elem.classList.remove(TAGS.TAG_expressionComplexeATraiter);
+                        //elem.classList.remove(TAGS.TAG_BranchesTraitees);
+                        elem.classList.add(TAGS.TAG_BranchesFermees);
+                        console.log("branche fermé");
+                    } else {
+                        console.log("branche ouverte");
+                        elem.classList.remove(TAGS.TAG_BranchesFermees);
+                    }
+                }else{
+                    console.log("Impossible de fermer cette branche");
+                }
             }
         },false);
 
@@ -136,6 +148,7 @@ class Arbre{
                         //On modifie la branche actuelle
                         parent.classList.remove(TAGS.TAG_BranchesATraiter);
                         parent.classList.add(TAGS.TAG_BranchesTraitees);
+                        parent.classList.remove(TAGS.TAG_BrancheFermable)
 
                         //On enlève ensuite le TAG_expressionComplexeATraiter
                         element.classList.remove(TAGS.TAG_expressionComplexeATraiter);
@@ -170,7 +183,11 @@ class Arbre{
                             let wrapper = document.createElement("div");
                             wrapper.classList.add(TAGS.TAG_Wrapper);
                             wrapper.id = "f"+(k+1)+parent.id;
+
+                            //PATCH
                             wrapper.style.width = (100/res.length)+"%";
+                            //wrapper.style.minWidth = "500px";
+
                             //Ajouter une branche ayant pour container wrapper
                             Arbre.addBranche(wrapper,branche_br,res[k]);
                         }
