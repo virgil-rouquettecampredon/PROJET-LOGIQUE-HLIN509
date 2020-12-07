@@ -4,6 +4,7 @@
     --branche_color : #544427;
     --branche_traitee_color : #8C7140;
     --branche_ferme_color : #F7C32E;
+    --virgil : #CB152B;
     --bg-expression-hover : #F1F5F2;
     --shadow-arbre : 7px 7px 18px 0px rgba(0,0,0,0.39);
     --shadow-arbre-hoover: 7px 7px 18px 0px rgba(0,0,0,0.39), 7px 7px 18px 0px rgba(84,68,39,0.52);
@@ -22,8 +23,6 @@ div#Arbre{
     font-family: 'Roboto', sans-serif;
     /*font-family: 'Teko', sans-serif;*/
     font-size: x-large;
-    padding-bottom: 5%;
-    margin-bottom: 5%;
 }
 
 /*Pour le titre*/
@@ -181,26 +180,29 @@ div#Arbre canvas.liaison{
 
 div#Arbre, div#Arbre div.wrapper {
     position: relative;
+    padding-bottom: 30px;
 }
 
 div#btn_end{
     display: block;
     position: fixed;
     box-shadow: 0 0 15px 5px rgba(0,0,0,0.45);
-    background-color: black;
+    background-color: var(--bg-expression-hover);
+    border-top: 5px solid var(--main_color);
     width: 110%;
     height: auto;
     bottom: 0;
     right: -5%;
     left: -5%;
     z-index: 20;
+
 }
 
 div#btn_end button{
     display: block;
     margin: 5px auto;
-    padding: 1px;
-
+    padding: 5px;
+    font-size: 20px !important;
     background-color: transparent;
 
     color: var(--main_color);
@@ -209,8 +211,8 @@ div#btn_end button{
 }
 
 div#btn_end button:hover{
-    border: 3px solid var(--bg-expression-hover);
-    color: var(--bg-expression-hover);
+    border: 3px solid var(--branche_ferme_color);
+    color: var(--branche_ferme_color);
     cursor: pointer;
 }
 

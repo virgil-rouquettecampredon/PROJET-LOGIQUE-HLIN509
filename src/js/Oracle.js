@@ -108,12 +108,7 @@ function onclk_terminer(){
     if(confirm("Etes-vous sur de vouloir terminer ?")) {
         init_score();
     }else{
-        /*let el_erreur_end = document.getElementById(TAGS.TAGID_AREAERR_END);
-        el_erreur_end.innerHTML = "";
-        let erreur = document.createElement("p");
-        erreur.innerText = message;
-        el_erreur_end.append(erreur);*/
-        console.log("PEUT PAS");
+        console.log("OK BOOMER");
     }
 }
 
@@ -155,9 +150,24 @@ function alert_expression(message){
 /**Fonction permettant d'initier la phase finale de scorring**/
 function init_score(){
     //Calcul du score et affichage
-    el_score.style.display = "block";
     //On stope le compteur
     clearInterval(timerInterval);
+    //On enlève tous les onclicks possibles
+    let brancheOnclk = document.getElementsByClassName(TAGS.TAG_Branche);
+    console.log(brancheOnclk);
+    let expressionOnclk = document.getElementsByClassName(TAGS.TAG_expression);
+    console.log(expressionOnclk);
+    for (let i = 0; i < brancheOnclk.length; i++) {
+        brancheOnclk[i].replaceWith(brancheOnclk[i].cloneNode(true));
+    }
+    for (let j = 0; j < expressionOnclk.length; j++) {
+        expressionOnclk[j].replaceWith(expressionOnclk[j].cloneNode(true));
+    }
+    bouton_fin.style.display = "none";
+
+    //On affiche le score
+    el_score.style.display = "block";
+
 }
 
 /**Fonction permettant d'initier le timer**/
@@ -182,6 +192,21 @@ function lunchTimer(container){
     }
 
     return setInterval(affiche_heure, 1000);
+}
+
+function countScoreTime(){
+    let temps = document.getElementById(TAGS.TAGID_Timer_val).innerText;
+    temps.slice(5,7);
+    let bonus = 0;
+    switch (temps){
+        case "00 : 15":
+            bonus++;
+        case "00 : 25":
+            bonus++;
+        case "00 : 35":
+            bonus++;
+            break;
+    }
 }
 
 init_Oracle();

@@ -5,6 +5,8 @@
     <title>ORACLE</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/CSS_GestionArbre.css">
     <link rel="stylesheet" href="../css/CSS_GestionEntree.css">
@@ -20,7 +22,7 @@
 
 <body>
 <div id="Formule">
-    <div id="name">SUPER ORACLE</div>
+    <div id="name"><div>SUPER ORACLE 3000</div></div>
     <div id="elementsARentrer">
         <span id="n1">Erwan Reinders</span><span id="n2">Virgil Rouquette Campredon</span>
         <div id="elem">
@@ -75,9 +77,24 @@
 </div>
 <div id="Score">
     <div id="Recapitulatif">
-        Recapitulatif de score
+        <p>Recapitulatif de score</p>
     </div>
-
+    <div id="ContennuScore">
+        <div>
+            <div>
+                <div class="scoreElement" id="bonusTemps"><span class="content">0</span>Bonus  de  temps</div>
+                <div class="scoreElement" id="malusOnBlur"><span class="content">0</span>Malus sortir de la page</div>
+                <div class="scoreElement" id="bonusBienFermeSurFermable"><span class="content">0</span>Branches bien fermées</div>
+                <div class="scoreElement" id="bonusExpResteADev"><span class="content">0</span>Bonus expressions encore dev</div>
+                <div class="scoreElement" id="total"><span class="content">9999</span>TOTAL</div>
+            </div>
+        </div>
+    </div>
+    <div id="reload">
+        <button onclick="document.location.reload();">
+            Recommencer
+        </button>
+    </div>
 </div>
 </body>
 <script>
