@@ -196,17 +196,21 @@ function lunchTimer(container){
 
 function countScoreTime(){
     let temps = document.getElementById(TAGS.TAGID_Timer_val).innerText;
-    temps.slice(5,7);
-    let bonus = 0;
-    switch (temps){
-        case "00 : 15":
-            bonus++;
-        case "00 : 25":
-            bonus++;
-        case "00 : 35":
-            bonus++;
-            break;
+    let seconde = temps.slice(5,7);
+    let minute = temps.slice(0,2);
+    let bonus = 3;
+    if (minute < 1) {
+        if (seconde > 35) {
+            bonus-= 3;
+        }
+        else if (seconde > 25) {
+            bonus-=2;
+        }
+        else if (seconde > 15) {
+            bonus--;
+        }
     }
+    return bonus * 100;
 }
 
 init_Oracle();
