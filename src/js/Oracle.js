@@ -17,7 +17,8 @@ let el_score = document.getElementById(TAGS.TAGID_Score);
 let el_areaTxT = document.getElementById(TAGS.TAGID_AREATXT);
 
 let bouton_fin = document.getElementById(TAGS.TAGID_BTN_END);
-
+let timer = document.getElementById(TAGS.TAGID_Timer);
+let timerInterval = null;
 
 
 /**======================================================================
@@ -31,6 +32,7 @@ function init_Oracle(){
     el_score.style.display = "none";
     el_arbre.style.display = "none";
     bouton_fin.style.display = "none";
+    timer.style.display = "none";
     el_expressionRentree.style.display = "block";
     init_btn();
 }
@@ -96,6 +98,8 @@ function init_expression() {
         init_Arbre(exp);
         el_expressionRentree.style.display = "none";
         bouton_fin.style.display = "block";
+        timer.style.display = "block";
+        timerInterval = lunchTimer(document.getElementById(TAGS.TAGID_Timer_val));
     }
 }
 
@@ -152,7 +156,32 @@ function alert_expression(message){
 function init_score(){
     //Calcul du score et affichage
     el_score.style.display = "block";
+    //On stope le compteur
+    clearInterval(timerInterval);
 }
 
+/**Fonction permettant d'initier le timer**/
+function lunchTimer(container){
+    let maintenant = new Date();
+    let Start = maintenant.getTime();
+
+    function affiche_heure() {
+        let secondes_abs = Math.round(calcul_temps());
+        let secondes_rel = secondes_abs % 60;
+        let minutes_abs = Math.abs(Math.round(secondes_abs - 30) / 60);
+        //let minutes_normal = minutes_abs%60;
+
+        let nombre_secondes = "" + ((secondes_rel > 9) ? secondes_rel : "0" + secondes_rel);
+        let nombre_minutes = "" + ((minutes_abs > 9) ? minutes_abs : "0" + minutes_abs);
+        container.innerText = nombre_minutes + ":" + nombre_secondes;
+    }
+
+    function calcul_temps() {
+        let encore_toujours = new Date();
+        return((encore_toujours.getTime() - Start)/1000);
+    }
+
+    return setInterval(affiche_heure, 100);
+}
 
 init_Oracle();

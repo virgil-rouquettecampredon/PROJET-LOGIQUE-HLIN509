@@ -1,0 +1,10 @@
+#timer{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: auto;
+    height: auto;
+    color: var(--main_color);
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+}

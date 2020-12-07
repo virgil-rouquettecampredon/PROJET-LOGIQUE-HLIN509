@@ -36,5 +36,7 @@ const TAGS = {
     /*TAG ID Pour areaTXT*/                                                 TAGID_AREATXT : "area_exp",
     /*TAG ID Pour areaEROR d'expression*/                                   TAGID_AREAERR : "area_err",
     /*TAG ID Pour le bouton terminer*/                                      TAGID_BTN_END : "btn_end",
+    /*TAG ID Pour le Timer*/                                                TAGID_Timer : "timer",
+    /*TAG ID Pour la valeur du Timer*/                                      TAGID_Timer_val : "timer_value",
     /*TAG ID Pour areaEROR d'arbre*/                                        TAGID_AREAERR_END : "area_err_end",/*DEPRECATED*/
 };

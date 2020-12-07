@@ -23,13 +23,14 @@ div#Arbre{
     /*font-family: 'Teko', sans-serif;*/
     font-size: x-large;
     padding-bottom: 5%;
+    margin-bottom: 5%;
 }
 
 /*Pour le titre*/
 div#Arbre div#titre{
     position: relative;
     color: var(--main_color);
-    margin: 2% auto;
+    margin: 2% auto 1% auto;
     width: 100%;
     font-size: xx-large;
 }
@@ -185,7 +186,7 @@ div#Arbre, div#Arbre div.wrapper {
 div#btn_end{
     display: block;
     position: fixed;
-    box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.45);
+    box-shadow: 0 0 15px 5px rgba(0,0,0,0.45);
     background-color: black;
     width: 110%;
     height: auto;
@@ -199,15 +200,17 @@ div#btn_end button{
     display: block;
     margin: 5px auto;
     padding: 1px;
-    color: var(--bg-expression-hover);
+
     background-color: transparent;
-    border: 3px solid var(--bg-expression-hover);
+
+    color: var(--main_color);
+    border: 3px solid var(--main_color);
     transition: color .2s, border-bottom-color .1s;
 }
 
 div#btn_end button:hover{
-    color: var(--main_color);
-    border: 3px solid var(--main_color);
+    border: 3px solid var(--bg-expression-hover);
+    color: var(--bg-expression-hover);
     cursor: pointer;
 }
 
