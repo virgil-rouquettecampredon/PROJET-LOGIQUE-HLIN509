@@ -54,8 +54,12 @@ class Expression {
                     console.log("negation");
                     return false;
                 }
-                if (this.StringADonner[i] == "(" && !(lettre.includes(this.StringADonner[i+1]) || this.StringADonner[i+1] == "(")){
+                if (this.StringADonner[i] == "(" && !(lettre.includes(this.StringADonner[i+1]) || negation.includes(this.StringADonner[i+1]) || this.StringADonner[i+1] == "(")){
                     console.log("parantheseOuvrante");
+                    return false;
+                }
+                if (this.StringADonner[i] == ")" && !(operateur.includes(this.StringADonner[i+1]) || this.StringADonner[i+1] == ")")){
+                    console.log("parantheseFermante");
                     return false;
                 }
             }      //A VERIFIER
