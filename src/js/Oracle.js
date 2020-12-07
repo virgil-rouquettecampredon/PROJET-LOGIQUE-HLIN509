@@ -231,15 +231,56 @@ function countScoreTime(){
 
 function countScoreBF(){
     let el_brancheFermee = document.getElementsByClassName(TAGS.TAG_BranchesFermees);
+    let contradiction = false;
+    let branche = [];
+
+    for (let i = 0; i < 2; i++) {
+        branche[i] = 0;
+    }
+
     for (let i = 0; i < el_brancheFermee.length; i++) {
         let el_expressions = el_brancheFermee[i].getElementsByClassName(TAGS.TAG_expression);
         for (let j = 0; j < el_expressions.length; j++) {
+            let negationSimple = false;
+            let operande = el_expressions[j].innerText;
+            if (el_expressions[j].innerText.length == 4){
+                negationSimple = true;
+            }
             for (let k = j+1; k < el_expressions.length; k++) {
-
-                if(el_expressions[j].innerText)
-
+                if (negationSimple && operande[0] == "¬" && operande[operande.length-1] == ")"){
+                    if (el_expressions[k].innerText.length == 3) {
+                        if (el_expressions[k].innerText.slice(1,2) == operande.slice(2, 3)) {
+                            contradiction = true;
+                        }
+                    }
+                    else if(el_expressions[k].innerText.length == 1){
+                        if (el_expressions[k].innerText == operande.slice(2, 3)) {
+                            contradiction = true;
+                        }
+                    }
+                    negationSimple = false;
+                }
+                else if (!negationSimple && operande.length >=1 && operande.length<= 3){
+                    if (operande.length == 3){
+                        operande = operande.slice(1,2);
+                    }
+                    if (el_expressions[k].innerText.length == 4) {
+                        if (el_expressions[k].innerText.slice(2,3) == operande) {
+                            contradiction = true;
+                        }
+                    }
+                }
+                if (contradiction){
+                    branche[0] += 1;
+                    break;
+                }
+            }
+            if (contradiction){
+                branche[1] += el_brancheFermee[i].getElementsByClassName(TAGS.TAG_expressionComplexeATraiter).length;
+                break;
             }
         }
     }
+    return branche;
 }
 init_Oracle();

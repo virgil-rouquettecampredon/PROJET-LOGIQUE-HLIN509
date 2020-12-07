@@ -188,6 +188,7 @@ class Expression {
             else if (operande[0] == "↔"){
                 this.tableauOperande[i] = "∨";
                  caractere = this.tableauOperande[i-1].substring(1);
+                 caractere = caractere.slice(1, caractere.length-1);
                 this.tableauOperande[i-1] = "¬(" + caractere + "→" + this.tableauOperande[i+1] + ")";
                 doubleImpliqNega = true;
             }
@@ -199,7 +200,7 @@ class Expression {
                 this.tableauOperande[i] = this.tableauOperande[i].substring(1);
             }
             else {
-                this.tableauOperande[i] = "¬" + this.tableauOperande[i];
+                this.tableauOperande[i] = "¬(" + this.tableauOperande[i]+ ")";
             }
         }
     }
