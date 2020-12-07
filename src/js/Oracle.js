@@ -168,12 +168,12 @@ function lunchTimer(container){
     function affiche_heure() {
         let secondes_abs = Math.round(calcul_temps());
         let secondes_rel = secondes_abs % 60;
-        let minutes_abs = Math.abs(Math.round(secondes_abs - 30) / 60);
+        let minutes_abs = Math.trunc(secondes_abs / 60);
         //let minutes_normal = minutes_abs%60;
 
         let nombre_secondes = "" + ((secondes_rel > 9) ? secondes_rel : "0" + secondes_rel);
         let nombre_minutes = "" + ((minutes_abs > 9) ? minutes_abs : "0" + minutes_abs);
-        container.innerText = nombre_minutes + ":" + nombre_secondes;
+        container.innerText = nombre_minutes + " : " + nombre_secondes;
     }
 
     function calcul_temps() {
@@ -181,7 +181,7 @@ function lunchTimer(container){
         return((encore_toujours.getTime() - Start)/1000);
     }
 
-    return setInterval(affiche_heure, 100);
+    return setInterval(affiche_heure, 1000);
 }
 
 init_Oracle();
