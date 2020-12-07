@@ -330,6 +330,7 @@ div#Formule div#regle div p{
     margin-top: 3%;
     border-left: 4px solid var(--main_color);
     padding-left: 10px;
+    font-size: 20px;
 }
 
 div#Formule div#regle div p span.important{
