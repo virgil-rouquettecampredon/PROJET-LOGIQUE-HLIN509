@@ -20,6 +20,7 @@ let bouton_fin = document.getElementById(TAGS.TAGID_BTN_END);
 let timer = document.getElementById(TAGS.TAGID_Timer);
 let timerInterval = null;
 
+let nbAltTab = 0;
 
 /**======================================================================
  * ============================= FONCTIONS ==============================
@@ -100,6 +101,10 @@ function init_expression() {
         bouton_fin.style.display = "block";
         timer.style.display = "block";
         timerInterval = lunchTimer(document.getElementById(TAGS.TAGID_Timer_val));
+        //Gestion alttab
+        window.onblur = ()=>{
+            nbAltTab++;
+        }
     }
 }
 
@@ -167,7 +172,18 @@ function init_score(){
 
     //On affiche le score
     el_score.style.display = "block";
-
+    let el_bonus_Temps = document.getElementById("bonusTemps").getElementsByClassName("content");
+    let bonusTps = countScoreTime()
+    el_bonus_Temps.innerText = bonusTps;
+    let el_malus_onblr = document.getElementById("malusOnBlur").getElementsByClassName("content");
+    el_malus_onblr.innerText = nbAltTab*75;
+    let el_bonus_BF = document.getElementById("bonusBienFermeSurFermable").getElementsByClassName("content");
+    let el_bonus_ExpADev = document.getElementById("bonusExpResteADev").getElementsByClassName("content");
+    let bonus = countScoreBF();
+    el_bonus_ExpADev.innerText = bonus[0];
+    el_bonus_BF.innerText = bonus[1];
+    let el_total = document.getElementById("total").getElementsByClassName("content");
+    el_total.innerText = (bonusTps+bonus[0]+bonus[1]-(nbAltTab*75));
 }
 
 /**Fonction permettant d'initier le timer**/
@@ -213,4 +229,17 @@ function countScoreTime(){
     return bonus * 100;
 }
 
+function countScoreBF(){
+    let el_brancheFermee = document.getElementsByClassName(TAGS.TAG_BranchesFermees);
+    for (let i = 0; i < el_brancheFermee.length; i++) {
+        let el_expressions = el_brancheFermee[i].getElementsByClassName(TAGS.TAG_expression);
+        for (let j = 0; j < el_expressions.length; j++) {
+            for (let k = j+1; k < el_expressions.length; k++) {
+
+                if(el_expressions[j].innerText)
+
+            }
+        }
+    }
+}
 init_Oracle();
