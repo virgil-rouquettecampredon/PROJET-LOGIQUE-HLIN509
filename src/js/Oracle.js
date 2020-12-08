@@ -176,14 +176,16 @@ function init_score(){
     let bonusTps = countScoreTime()
     el_bonus_Temps.innerText = bonusTps;
     let el_malus_onblr = document.getElementById("malusOnBlur").getElementsByClassName("content")[0];
-    el_malus_onblr.innerText = nbAltTab*75;
+    el_malus_onblr.innerText = -nbAltTab*75;
     let el_bonus_BF = document.getElementById("bonusBienFermeSurFermable").getElementsByClassName("content")[0];
     let el_bonus_ExpADev = document.getElementById("bonusExpResteADev").getElementsByClassName("content")[0];
+    let el_malus_MF = document.getElementById("bonusMalFerme").getElementsByClassName("content")[0];
     let bonus = countScoreBF();
     el_bonus_ExpADev.innerText = bonus[1]*200;
     el_bonus_BF.innerText = bonus[0]*500;
+    el_malus_MF.innerText = -bonus[2]*250;
     let el_total = document.getElementById("total").getElementsByClassName("content")[0];
-    el_total.innerText = (bonusTps+bonus[0]*500+bonus[1]*200-(nbAltTab*75));
+    el_total.innerText = (bonusTps+bonus[0]*500+bonus[1]*200-(nbAltTab*75)-(bonus[2]*250));
 }
 
 /**Fonction permettant d'initier le timer**/
@@ -234,7 +236,7 @@ function countScoreBF(){
     let contradiction = false;
     let branche = [];
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
         branche[i] = 0;
     }
 
@@ -277,9 +279,13 @@ function countScoreBF(){
             }
             if (contradiction){
                 branche[1] += el_brancheFermee[i].getElementsByClassName(TAGS.TAG_expressionComplexeATraiter).length;
-                contradiction = false;
                 break;
             }
+        }
+        if(!contradiction){
+            branche[2]++;
+        }else{
+            contradiction = false;
         }
     }
     return branche;

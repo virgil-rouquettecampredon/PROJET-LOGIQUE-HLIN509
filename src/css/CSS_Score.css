@@ -243,7 +243,7 @@ div#Score div#ContennuScore div div div.scoreElement:hover{
 }
 
 div#Score div#ContennuScore div div div#bonusTemps{
-    top: 35px;
+    top: 25px;
     animation-delay: 2.2s;
     animation-duration: .1s;
     animation-fill-mode: forwards;
@@ -251,11 +251,11 @@ div#Score div#ContennuScore div div div#bonusTemps{
 }
 
 div#Score div#ContennuScore div div div#bonusTemps:hover{
-    top: 30px;
+    top: 20px;
 }
 
 div#Score div#ContennuScore div div div#malusOnBlur{
-    top: 95px;
+    top: 85px;
     animation-delay: 2.3s;
     animation-duration: .1s;
     animation-fill-mode: forwards;
@@ -263,11 +263,11 @@ div#Score div#ContennuScore div div div#malusOnBlur{
 }
 
 div#Score div#ContennuScore div div div#malusOnBlur:hover{
-    top: 90px;
+    top: 80px;
 }
 
 div#Score div#ContennuScore div div div#bonusBienFermeSurFermable{
-    top: 155px;
+    top: 145px;
     animation-delay: 2.4s;
     animation-duration: .1s;
     animation-fill-mode: forwards;
@@ -275,11 +275,11 @@ div#Score div#ContennuScore div div div#bonusBienFermeSurFermable{
 }
 
 div#Score div#ContennuScore div div div#bonusBienFermeSurFermable:hover{
-    top: 150px;
+    top: 140px;
 }
 
 div#Score div#ContennuScore div div div#bonusExpResteADev{
-    top: 215px;
+    top: 205px;
     animation-delay: 2.5s;
     animation-duration: .1s;
     animation-fill-mode: forwards;
@@ -287,11 +287,23 @@ div#Score div#ContennuScore div div div#bonusExpResteADev{
 }
 
 div#Score div#ContennuScore div div div#bonusExpResteADev:hover{
-    top: 210px;
+    top: 200px;
+}
+
+div#Score div#ContennuScore div div div#bonusMalFerme{
+    top: 265px;
+    animation-delay: 2.6s;
+    animation-duration: .1s;
+    animation-fill-mode: forwards;
+    background: linear-gradient(to right, var(--virgil) 0%, var(--virgil) 30%, transparent 60%, transparent 100%);
+}
+
+div#Score div#ContennuScore div div div#bonusMalFerme:hover{
+    top: 260px;
 }
 
 div#Score div#ContennuScore div div div#total.scoreElement{
-    top: 275px;
+    top: 310px;
     animation: aparitionTotal;
     animation-delay: 2.8s;
     animation-duration: .1s;
