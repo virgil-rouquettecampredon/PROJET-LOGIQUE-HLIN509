@@ -172,18 +172,18 @@ function init_score(){
 
     //On affiche le score
     el_score.style.display = "block";
-    let el_bonus_Temps = document.getElementById("bonusTemps").getElementsByClassName("content");
+    let el_bonus_Temps = document.getElementById("bonusTemps").getElementsByClassName("content")[0];
     let bonusTps = countScoreTime()
     el_bonus_Temps.innerText = bonusTps;
-    let el_malus_onblr = document.getElementById("malusOnBlur").getElementsByClassName("content");
+    let el_malus_onblr = document.getElementById("malusOnBlur").getElementsByClassName("content")[0];
     el_malus_onblr.innerText = nbAltTab*75;
-    let el_bonus_BF = document.getElementById("bonusBienFermeSurFermable").getElementsByClassName("content");
-    let el_bonus_ExpADev = document.getElementById("bonusExpResteADev").getElementsByClassName("content");
+    let el_bonus_BF = document.getElementById("bonusBienFermeSurFermable").getElementsByClassName("content")[0];
+    let el_bonus_ExpADev = document.getElementById("bonusExpResteADev").getElementsByClassName("content")[0];
     let bonus = countScoreBF();
-    el_bonus_ExpADev.innerText = bonus[0];
-    el_bonus_BF.innerText = bonus[1];
-    let el_total = document.getElementById("total").getElementsByClassName("content");
-    el_total.innerText = (bonusTps+bonus[0]+bonus[1]-(nbAltTab*75));
+    el_bonus_ExpADev.innerText = bonus[1]*200;
+    el_bonus_BF.innerText = bonus[0]*500;
+    let el_total = document.getElementById("total").getElementsByClassName("content")[0];
+    el_total.innerText = (bonusTps+bonus[0]*500+bonus[1]*200-(nbAltTab*75));
 }
 
 /**Fonction permettant d'initier le timer**/
@@ -277,6 +277,7 @@ function countScoreBF(){
             }
             if (contradiction){
                 branche[1] += el_brancheFermee[i].getElementsByClassName(TAGS.TAG_expressionComplexeATraiter).length;
+                contradiction = false;
                 break;
             }
         }
