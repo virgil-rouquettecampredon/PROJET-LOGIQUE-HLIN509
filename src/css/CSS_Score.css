@@ -303,7 +303,7 @@ div#Score div#ContennuScore div div div#bonusMalFerme:hover{
 }
 
 div#Score div#ContennuScore div div div#total.scoreElement{
-    top: 310px;
+    top: 320px;
     animation: aparitionTotal;
     animation-delay: 2.8s;
     animation-duration: .1s;
